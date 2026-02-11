@@ -2,15 +2,26 @@ from flask import Flask,jsonify
 import json
 
 app=Flask(__name__)
+app.json.sort_keys=False
 
 def get_sorted_leaderboard():
     try:
-        with open("data.json",'r') as f:
-            players=json.load(f)
+        with open("data.json", 'r') as f:
+            players = json.load(f)
 
-        sorted_players=dict(sorted(players.items(),key=lambda item: item[1]['total_winning'],reverse=True))
-        return sorted_players
-    except (FileNotFoundError,json.JSONDecodeError):
+        # DEBUG PRINT: Look at your terminal after you refresh the page
+        for name, stats in players.items():
+            print(f"DEBUG: Player {name} has {stats['total_winning']} (Type: {type(stats['total_winning'])})")
+
+        # The Fix: Explicitly cast to int just for the sorting calculation
+        sorted_items = sorted(
+            players.items(), 
+            key=lambda item: int(item[1]['total_winning']), 
+            reverse=True
+        )
+        return dict(sorted_items)
+    except Exception as e:
+        print(f"Error during sort: {e}")
         return {}
 
 
