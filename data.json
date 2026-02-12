@@ -1,33 +1,37 @@
 {
-    "abhi": {
-        "total_winning": 110,
-        "history": [
-            {
-                "date": "2026-02-08",
-                "winning": 30
-            },
-            {
-                "date": "2026-02-08",
-                "winning": 80
-            }
-        ]
-    },
-    "sam": {
-        "total_winning": 50,
-        "history": [
-            {
-                "date": "2026-02-08",
-                "winning": 50
-            }
-        ]
-    },
-    "dhruv": {
-        "total_winning": 40,
-        "history": [
-            {
-                "date": "2026-02-08",
-                "winning": 40
-            }
-        ]
-    }
+  "abhi": {
+    "total_winning": 110,
+    "history": [
+      {
+        "date": "2026-02-08",
+        "winning": 30
+      },
+      {
+        "date": "2026-02-08",
+        "winning": 80
+      }
+    ]
+  },
+  "sam": {
+    "total_winning": 100,
+    "history": [
+      {
+        "date": "2026-02-08",
+        "winning": 50
+      },
+      {
+        "date": "2026-02-13",
+        "winning": 50
+      }
+    ]
+  },
+  "dhruv": {
+    "total_winning": 40,
+    "history": [
+      {
+        "date": "2026-02-08",
+        "winning": 40
+      }
+    ]
+  }
 }
