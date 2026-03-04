@@ -1,4 +1,4 @@
-from flask import Flask,jsonify,request
+from flask import Flask,jsonify,request,render_template
 import json
 from datetime import datetime
 
@@ -30,8 +30,10 @@ def add_win():
     data=request.get_json()
 
     name=data.get('name','').lower()
-    amount=int(data.get('winning',0))
     today=datetime.now().strftime('%Y-%m-%d')
+    date=data.get('date',today)
+    amount=(data.get('winning',0))
+    
 
     if not isinstance(amount,(int,float)):
         return jsonify({"status":"error","message":"Winning must be a number"}),400
@@ -44,7 +46,7 @@ def add_win():
             players[name]['total_winning']+=amount
             players[name]['history'].append(
                 {
-                    'date':today,
+                    'date':date,
                     'winning':amount
                     
                 }
@@ -68,6 +70,11 @@ def add_win():
 def leaderboard():
     data=get_sorted_leaderboard()
     return jsonify(data)
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
 
 if __name__== '__main__':
     app.run(debug=True,port=5000)

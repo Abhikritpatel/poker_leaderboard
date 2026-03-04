@@ -40,7 +40,7 @@ for i in range(num_players):
 
 
 
-# players=sort_players(players)
+players=sort_players(players)
 
 
 print(f"-----LEADERBOARD-----")
