@@ -2,15 +2,103 @@
 <html>
 
 
+
 <head> 
-<title> Poker Tracker </title>
+    <title>Poker Tracker</title>
+        <style>
+        /* 1. Deep Space Background */
+        body {
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                background-color: #0d1117; /* Deep terminal black */
+                color: #c9d1d9; /* Crisp off-white text */
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+        }
+
+        /* 2. The Input Card */
+        .input-card {
+                background-color: #161b22; /* Slightly elevated dark grey */
+                padding: 25px;
+                border-radius: 12px;
+                box-shadow: 0 8px 24px rgba(0,0,0,0.4); /* Deeper shadows for dark mode */
+                margin-bottom: 30px;
+                border: 1px solid #30363d; /* Subtle metallic border */
+        }
+
+        /* 3. Sleek Inputs */
+        label {
+                font-weight: 600;
+                font-size: 0.9em;
+                color: #8b949e; /* Muted label text */
+                display: block;
+                margin-bottom: 5px;
+        }
+        input {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 15px;
+                background-color: #0d1117; /* Inset dark background for text boxes */
+                border: 1px solid #30363d;
+                border-radius: 6px;
+                color: #c9d1d9;
+                font-size: 1em;
+                box-sizing: border-box;
+        }
+        input:focus {
+                outline: none;
+                border-color: #f85149; /* Sharp red glow when typing */
+        }
+
+        /* 4. Punchy Action Button */
+        button {
+                background-color: #da3633; /* Deep crimson */
+                color: white;
+                border: none;
+                padding: 12px 20px;
+                border-radius: 6px;
+                font-size: 1em;
+                font-weight: bold;
+                cursor: pointer;
+                width: 100%;
+                transition: background-color 0.2s;
+        }
+        button:hover {
+                background-color: #f85149; /* Brightens up when hovered */
+        }
+
+        /* 5. The Leaderboard Table */
+        table {
+                width: 100%;
+                border-collapse: collapse;
+                background-color: #161b22;
+                box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+                border-radius: 12px;
+                overflow: hidden;
+                border: 1px solid #30363d;
+        }
+        th, td {
+                padding: 15px;
+                text-align: left;
+                border-bottom: 1px solid #30363d;
+        }
+        th {
+                background-color: #0d1117;
+                font-weight: 600;
+                color: #8b949e;
+        }
+        tr:nth-child(even) {
+                background-color: #1c2128; /* Subtle striping for readability */
+        }
+        </style>
+
 </head>
 
 <body> 
 <h1> Poker Leaderboard and Tracker </h1>
 
 
-<div style="background-color: #e56369; padding: 20px; width: 300px;">
+<div class="input-card">
 
 <h2> Add a match </h2>
 <label> Player Name: </label>
@@ -27,8 +115,82 @@
 
 <div style="margin-top: 30px;">
         <h3>Current Standings</h3>
-        <p>Leaderboard will go here...</p>
+        <div id ='leaderboard_display'> loading leaderboard ...... </div>
 </div>
+
+<script>
+        function submitData(){
+                let name = document.getElementById("Playername").value;
+                let date=document.getElementById("gameDate").value;
+                let winning=document.getElementById("winAmount").value;
+
+                let data_package={
+                        "name":name,
+                        "date":date,
+                        "winning":parseInt(winning)
+                };
+
+                fetch('/api/add_win',{
+                        method:'POST',
+                        headers: {
+                                'Content-Type' : 'application/json'
+                        },
+                        body:JSON.stringify(data_package)
+                })
+
+                .then(response => response.json())
+                .then(result=>{
+                        alert(result.message);
+                        get_leaderboard();
+                })
+                .catch(error=>{
+                        console.error('Error details: ',error)
+                        alert("Server error, couldn't save the data!")
+
+                });
+
+
+
+                
+
+                // alert("Success! You typed Name: " + name + " | Amount: " + amount +" | Date:"+ date);
+
+        }
+
+        function get_leaderboard(){
+                fetch('/api/leaderboard',{
+                        method:'GET',
+                })
+                .then(response=>response.json())
+                .then(result=>{
+                        let tableHTML="<table>"
+                        tableHTML += "<tr><th>Rank</th> <th>Player</th><th>All Time Winning </th></tr>";
+
+                        for(let i=0;i<result.length;i++){
+                                let player=result[i];
+                                let scoreColor = (player.total_winning >= 0) ? "#3fb950" : "#f85149"; // Green for positive, Red for negative
+                                let emoji="";
+                                if(i==0) emoji="👑";
+                                if(i===1) emoji="🥈";
+                                if(i===2) emoji="🥉";
+                                if(i===result.length-1 && player.total_winning<0) emoji="💀"
+                                tableHTML += `<tr><td>${i+1}</td><td>${player.name} ${emoji}</td><td style="color: ${scoreColor}; font-weight: bold;">${player.total_winning}</td></tr>`;
+                        }
+                        tableHTML+="</table>";
+                        document.getElementById('leaderboard_display').innerHTML=tableHTML;
+                })
+                .catch(error=>{
+                        console.error('Error details: ',error)
+                        alert("Server error, couldn't fetch the leaderboard")
+
+
+                });
+                
+
+        }
+        get_leaderboard();
+</script>
+
 
 </body>
 

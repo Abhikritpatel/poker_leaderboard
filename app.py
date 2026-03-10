@@ -10,20 +10,31 @@ def get_sorted_leaderboard():
         with open("data.json", 'r') as f:
             players = json.load(f)
 
-        # DEBUG PRINT: Look at your terminal after you refresh the page
-        for name, stats in players.items():
+        
+        for name,stats in players.items():
             print(f"DEBUG: Player {name} has {stats['total_winning']} (Type: {type(stats['total_winning'])})")
 
-        # The Fix: Explicitly cast to int just for the sorting calculation
-        sorted_items = sorted(
-            players.items(), 
-            key=lambda item: int(item[1]['total_winning']), 
+        leaderboard_list=[]
+        for name,stats in players.items():
+            leaderboard_list.append({
+                'name':name,
+                'total_winning':stats['total_winning']
+            })
+        
+        sorted_items=sorted(
+            leaderboard_list,
+            key=lambda item: int(item['total_winning']),
             reverse=True
         )
-        return dict(sorted_items)
+     
+        return sorted_items
+    
+
     except Exception as e:
         print(f"Error during sort: {e}")
         return {}
+
+
 
 @app.route('/api/add_win',methods=['POST'])
 def add_win():
@@ -41,6 +52,12 @@ def add_win():
     try:
         with open('data.json','r') as f:
             players=json.load(f)
+
+        if name not in players:
+            players[name]={
+                "total_winning":0,
+                "history":[]
+            }
         
         if name in players:
             players[name]['total_winning']+=amount

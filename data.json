@@ -1,95 +1,204 @@
 {
-    "abhi": {
-        "total_winning": 510,
-        "history": [
-            {
-                "date": "2026-02-08",
-                "winning": 30
-            },
-            {
-                "date": "2026-02-08",
-                "winning": 80
-            },
-            {
-                "date": "2026-03-02",
-                "winning": 400
-            }
-        ]
-    },
-    "sam": {
-        "total_winning": 100,
-        "history": [
-            {
-                "date": "2026-02-08",
-                "winning": 50
-            },
-            {
-                "date": "2026-02-13",
-                "winning": 50
-            }
-        ]
-    },
-    "dhruv": {
-        "total_winning": 40,
-        "history": [
-            {
-                "date": "2026-02-08",
-                "winning": 40
-            }
-        ]
-    },
-    "kamboj": {
-        "total_winning": -2500,
-        "history": [
-            {
-                "date": "2026-03-02",
-                "winning": -2500
-            }
-        ]
-    },
-    "dhruvsingh": {
-        "total_winning": 900,
-        "history": [
-            {
-                "date": "2026-03-02",
-                "winning": 900
-            }
-        ]
-    },
-    "kevin": {
-        "total_winning": 4110,
-        "history": [
-            {
-                "date": "2026-03-02",
-                "winning": 4110
-            }
-        ]
-    },
-    "dhruvmathru": {
-        "total_winning": -2000,
-        "history": [
-            {
-                "date": "2026-03-02",
-                "winning": -2000
-            }
-        ]
-    },
-    "hasan": {
-        "total_winning": 590,
-        "history": [
-            {
-                "date": "2026-03-02",
-                "winning": 590
-            }
-        ]
-    },
-    "sammy": {
-        "total_winning": -1500,
-        "history": [
-            {
-                "date": "2026-03-02",
-                "winning": -1500
-            }
-        ]
-    }
+  "hitarth": {
+    "total_winning": 7000,
+    "history": [
+      {
+        "date": "2026-02-25",
+        "winning": 4130
+      },
+      {
+        "date": "2026-02-25",
+        "winning": 3870
+      },
+      {
+        "date": "2026-03-06",
+        "winning": -1000
+      }
+    ]
+  },
+  "kamboj": {
+    "total_winning": -1930,
+    "history": [
+      {
+        "date": "2026-02-25",
+        "winning": -120
+      },
+      {
+        "date": "2026-02-25",
+        "winning": -1560
+      },
+      {
+        "date": "2026-03-01",
+        "winning": -1700
+      },
+      {
+        "date": "2026-03-02",
+        "winning": -2500
+      },
+      {
+        "date": "2026-03-06",
+        "winning": 3950
+      }
+    ]
+  },
+  "dhruvsingh": {
+    "total_winning": -2070,
+    "history": [
+      {
+        "date": "2026-02-25",
+        "winning": -1500
+      },
+      {
+        "date": "2026-02-25",
+        "winning": -2500
+      },
+      {
+        "date": "2026-03-01",
+        "winning": 1030
+      },
+      {
+        "date": "2026-03-02",
+        "winning": 900
+      },
+      {
+        "date": "2026-03-06",
+        "winning": 0
+      }
+    ]
+  },
+  "kevin": {
+    "total_winning": 3380,
+    "history": [
+      {
+        "date": "2026-02-25",
+        "winning": -1620
+      },
+      {
+        "date": "2026-02-25",
+        "winning": -1000
+      },
+      {
+        "date": "2026-03-01",
+        "winning": 1040
+      },
+      {
+        "date": "2026-03-02",
+        "winning": 4110
+      },
+      {
+        "date": "2026-03-06",
+        "winning": 850
+      }
+    ]
+  },
+  "daksh": {
+    "total_winning": -600,
+    "history": [
+      {
+        "date": "2026-02-25",
+        "winning": -600
+      }
+    ]
+  },
+  "ganju": {
+    "total_winning": -220,
+    "history": [
+      {
+        "date": "2026-02-25",
+        "winning": -220
+      }
+    ]
+  },
+  "sammy": {
+    "total_winning": -120,
+    "history": [
+      {
+        "date": "2026-02-25",
+        "winning": 320
+      },
+      {
+        "date": "2026-03-01",
+        "winning": 1060
+      },
+      {
+        "date": "2026-03-02",
+        "winning": -1500
+      }
+    ]
+  },
+  "abhi": {
+    "total_winning": 5070,
+    "history": [
+      {
+        "date": "2026-02-25",
+        "winning": 2600
+      },
+      {
+        "date": "2026-03-01",
+        "winning": 2070
+      },
+      {
+        "date": "2026-03-02",
+        "winning": 400
+      }
+    ]
+  },
+  "mathur": {
+    "total_winning": -3000,
+    "history": [
+      {
+        "date": "2026-03-01",
+        "winning": -1000
+      },
+      {
+        "date": "2026-03-02",
+        "winning": -2000
+      }
+    ]
+  },
+  "vaibhav": {
+    "total_winning": -2500,
+    "history": [
+      {
+        "date": "2026-03-01",
+        "winning": -2500
+      }
+    ]
+  },
+  "hasan": {
+    "total_winning": 590,
+    "history": [
+      {
+        "date": "2026-03-02",
+        "winning": 590
+      }
+    ]
+  },
+  "herrick": {
+    "total_winning": -1100,
+    "history": [
+      {
+        "date": "2026-03-06",
+        "winning": -1100
+      }
+    ]
+  },
+  "agrim": {
+    "total_winning": -1600,
+    "history": [
+      {
+        "date": "2026-03-06",
+        "winning": -1600
+      }
+    ]
+  },
+  "bansal": {
+    "total_winning": -1500,
+    "history": [
+      {
+        "date": "2026-03-06",
+        "winning": -1500
+      }
+    ]
+  }
 }
