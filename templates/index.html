@@ -95,67 +95,112 @@
 </head>
 
 <body> 
-<h1> Poker Leaderboard and Tracker </h1>
+    <div id="leaderboard-view">
+        <h1 style="text-align: center;">Poker Hall of Fame 🏆</h1>
+        
+        <div id="leaderboard_display"> Loading leaderboard... </div>
 
+        <button id="start-game-btn" style="position: fixed; bottom: 30px; right: 30px; border-radius: 50%; width: 60px; height: 60px; font-size: 30px; box-shadow: 0 8px 24px rgba(0,0,0,0.6); padding: 0;">
+            +
+        </button>
+    </div>
 
-<div class="input-card">
+    <div id="live-game-view" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <button id="cancel-game-btn" style="background: transparent; color: #f85149; width: auto; padding: 10px;">Cancel</button>
+            <h2 style="margin: 0;">Live Session</h2>
+            <div style="width: 70px;"></div> </div>
 
-<h2> Add a match </h2>
-<label> Player Name: </label>
+        <div class="input-card" style="margin-top: 20px;">
+            <div style="display: flex; gap: 10px;">
+                <div style="flex: 2;">
+                    <label>Date</label>
+                    <input type="date" id="game-date">
+                </div>
+                <div style="flex: 1;">
+                    <label>Ratio</label>
+                    <input type="number" id="chip-ratio" value="5">
+                </div>
+                <div style="flex: 1;">
+                    <label>Buy-in (₹)</label>
+                    <input type="number" id="buy-in-amt" value="100">
+                </div>
+            </div>
+        </div>
 
-<input type="text" id="Playername" placeholder="eg: abhi" > <br> <br>
-<label> Winning amount: </label>
-<input type="number" id="winAmount" placeholder="eg:500"> <br> <br>
-<label> Date(optional): </label>
-<input type="date" id="gameDate" > <br> <br>
+        <h3>Table Roster</h3>
+        <div id="players-container">
+            </div>
 
-<button onclick="submitData()"> Add to leaderboard </button>
+        <button id="add-player-btn" style="background: transparent; border: 2px dashed #30363d; color: #8b949e; margin-top: 10px;">
+            + Seat a Player
+        </button>
 
-</div>
+        <div class="input-card" style="margin-top: 30px; text-align: center; border-color: #3fb950;">
+            <h3 id="live-balance" style="margin-top: 0; color: #f85149;">Discrepancy: Checking...</h3>
+            <button id="submit-game-btn" style="background-color: #3fb950;" disabled>
+                Math Doesn't Match
+            </button>
+        </div>
+    </div>
 
-<div style="margin-top: 30px;">
-        <h3>Current Standings</h3>
-        <div id ='leaderboard_display'> loading leaderboard ...... </div>
-</div>
+    <template id="player-row-template">
+        <div class="input-card player-row" style="display: flex; gap: 10px; padding: 15px; margin-bottom: 10px; align-items: center;">
+            <input type="text" class="p-name" placeholder="Name" style="flex: 2; margin-bottom: 0;">
+            
+            <div style="flex: 1;">
+                <label style="font-size: 11px;">Buy-ins</label>
+                <input type="number" class="p-buyins live-input" value="1" min="1" style="margin-bottom: 0;">
+            </div>
+            
+            <div style="flex: 1.5;">
+                <label style="font-size: 11px;">End Chips</label>
+                <input type="number" class="p-chips live-input" placeholder="0" style="margin-bottom: 0;">
+            </div>
+            
+            <button class="remove-btn" style="width: auto; padding: 10px; margin-bottom: 0;">X</button>
+        </div>
+    </template>
 
 <script>
-        function submitData(){
-                let name = document.getElementById("Playername").value;
-                let date=document.getElementById("gameDate").value;
-                let winning=document.getElementById("winAmount").value;
 
-                let data_package={
-                        "name":name,
-                        "date":date,
-                        "winning":parseInt(winning)
-                };
+       
+        
+        const leaderboardView = document.getElementById('leaderboard-view');
+        const liveGameView = document.getElementById('live-game-view');
+        const startGameBtn = document.getElementById('start-game-btn');
+        const cancelGameBtn = document.getElementById('cancel-game-btn');
 
-                fetch('/api/add_win',{
-                        method:'POST',
-                        headers: {
-                                'Content-Type' : 'application/json'
-                        },
-                        body:JSON.stringify(data_package)
-                })
+        startGameBtn.addEventListener('click',() =>{
+                leaderboardView.style.display='none';
+                liveGameView.style.display='block';
+        });
 
-                .then(response => response.json())
-                .then(result=>{
-                        alert(result.message);
-                        get_leaderboard();
-                })
-                .catch(error=>{
-                        console.error('Error details: ',error)
-                        alert("Server error, couldn't save the data!")
+        cancelGameBtn.addEventListener('click',() =>{
+                liveGameView.style.display='none';
+                leaderboardView.style.display='block';
+        });
 
+
+        const addPlayerBtn=document.getElementById('add-player-btn')
+        const playerContainer=document.getElementById('players-container')
+        const playerTemplate=document.getElementById('player-row-template')        
+
+        function add_player_row(){
+                const newrow=playerTemplate.content.cloneNode(true);
+
+                const removebtn=newrow.querySelector('.remove-btn');
+                removebtn.addEventListener('click',(event) =>{
+                        event.target.closest('.player-row').remove();
                 });
-
-
-
-                
-
-                // alert("Success! You typed Name: " + name + " | Amount: " + amount +" | Date:"+ date);
-
+                playerContainer.appendChild(newrow);
         }
+        addPlayerBtn.addEventListener('click',() =>{
+                add_player_row();
+        });
+        add_player_row();
+        add_player_row();
+
 
         function get_leaderboard(){
                 fetch('/api/leaderboard',{
@@ -189,6 +234,102 @@
 
         }
         get_leaderboard();
+
+
+        const chipRatioInput=document.getElementById('chip-ratio');
+        const buyInAmtInput=document.getElementById('buy-in-amt');
+        const liveBalanceText=document.getElementById('live-balance');
+        const submitGameBtn=document.getElementById('submit-game-btn');
+
+        function calculate_Balance(){
+                const chipratio=parseFloat(chipRatioInput.value) || 5;
+                const buyinamt=parseFloat(buyInAmtInput.value) || 100;
+                
+                let total_balance=0;
+
+                const rows=document.querySelectorAll('.player-row');
+
+                rows.forEach(row=>{
+                        const buyins=parseFloat(row.querySelector('.p-buyins').value) || 0;
+                        const endchips=parseFloat(row.querySelector('.p-chips').value) || 0;
+                        
+                        const profitLoss = (endchips / chipratio) - (buyinamt * buyins);
+                        total_balance += profitLoss;
+                })
+                total_balance=Math.round(total_balance);
+
+                if(total_balance==0){
+                        liveBalanceText.innerText = "Discrepancy: 0 (Perfect Match!)";
+                        liveBalanceText.style.color = "#3fb950"; 
+                        submitGameBtn.disabled = false;          
+                        submitGameBtn.innerText = "Settle Up & Save Game";
+                }
+                else {
+                        liveBalanceText.innerText = `Discrepancy: ${total_balance*chipratio}`;
+                        liveBalanceText.style.color = "#f85149"; 
+                        submitGameBtn.disabled = true;           
+                        submitGameBtn.innerText = "Math Doesn't Match";
+                }
+        }
+        document.addEventListener('input',(event) =>{
+                if(event.target.type=='number'){
+                        calculate_Balance();
+                }
+        });
+        
+        calculate_Balance();
+
+
+         submitGameBtn.addEventListener('click',()=>{
+             const rows=document.querySelectorAll('.player-row')
+             const transaction=[]
+             rows.forEach(row=>{
+                const Playername=row.querySelector('.p-name').value.trim();
+                const buyins=parseFloat(row.querySelector('.p-buyins').value) || 0;
+                const endchips=parseFloat(row.querySelector('.p-chips').value) || 0;
+
+                if (Playername !=="" ){
+                        transaction.push({
+                                name:Playername,
+                                buy_ins:buyins,
+                                end_chips:endchips
+
+                        });
+                }
+             });
+        
+
+        const payload={
+                date:document.getElementById('game-date').value,
+                chip_ratio:parseFloat(document.getElementById('chip-ratio').value) || 5,
+                buy_in_amt:parseFloat(document.getElementById('buy-in-amt').value) || 100,
+                transactions:transaction
+        }
+
+        fetch('/api/add_game',{
+                method:'POST',
+                headers:{'Content-Type':'application/json'},
+                body:JSON.stringify(payload)
+        })
+        .then(response=>response.json())
+        .then(data=>{
+                if(data.status=="error"){
+                        alert("Python rejected it");
+                }
+                else{
+                        alert("Game saved !");
+                        liveGameView.style.display='none';
+                        leaderboardView.style.display='block';
+                        get_leaderboard();
+                        
+                        document.getElementById('players-container').innerHTML='';
+                        add_player_row();
+                        add_player_row();
+                        calculate_Balance();
+                }
+        });
+
+});
 </script>
 
 

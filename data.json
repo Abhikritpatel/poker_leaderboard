@@ -1,10 +1,10 @@
 {
   "hitarth": {
-    "total_winning": 7000,
+    "total_winning": 7530,
     "history": [
       {
         "date": "2026-02-25",
-        "winning": 4130
+        "winning": 4080
       },
       {
         "date": "2026-02-25",
@@ -13,6 +13,14 @@
       {
         "date": "2026-03-06",
         "winning": -1000
+      },
+      {
+        "date": "2026-03-11",
+        "winning": -1920
+      },
+      {
+        "date": "2026-03-12",
+        "winning": 2500
       }
     ]
   },
@@ -38,11 +46,23 @@
       {
         "date": "2026-03-06",
         "winning": 3950
+      },
+      {
+        "date": "2026-03-11",
+        "winning": 3500
+      },
+      {
+        "date": "2026-03-12",
+        "winning": -5000
+      },
+      {
+        "date": "2026-03-13",
+        "winning": 1500
       }
     ]
   },
   "dhruvsingh": {
-    "total_winning": -2070,
+    "total_winning": -1320,
     "history": [
       {
         "date": "2026-02-25",
@@ -58,16 +78,28 @@
       },
       {
         "date": "2026-03-02",
-        "winning": 900
+        "winning": 800
       },
       {
         "date": "2026-03-06",
         "winning": 0
+      },
+      {
+        "date": "2026-03-11",
+        "winning": 2350
+      },
+      {
+        "date": "2026-03-12",
+        "winning": -4000
+      },
+      {
+        "date": "2026-03-13",
+        "winning": 2500
       }
     ]
   },
   "kevin": {
-    "total_winning": 3380,
+    "total_winning": -3220,
     "history": [
       {
         "date": "2026-02-25",
@@ -87,30 +119,54 @@
       },
       {
         "date": "2026-03-06",
-        "winning": 850
+        "winning": 750
+      },
+      {
+        "date": "2026-03-11",
+        "winning": -1000
+      },
+      {
+        "date": "2026-03-12",
+        "winning": -3000
+      },
+      {
+        "date": "2026-03-13",
+        "winning": -2500
       }
     ]
   },
   "daksh": {
-    "total_winning": -600,
+    "total_winning": -1550,
     "history": [
       {
         "date": "2026-02-25",
         "winning": -600
+      },
+      {
+        "date": "2026-02-25",
+        "winning": -950
       }
     ]
   },
   "ganju": {
-    "total_winning": -220,
+    "total_winning": 8020,
     "history": [
       {
         "date": "2026-02-25",
         "winning": -220
+      },
+      {
+        "date": "2026-03-11",
+        "winning": 740
+      },
+      {
+        "date": "2026-03-12",
+        "winning": 7500
       }
     ]
   },
   "sammy": {
-    "total_winning": -120,
+    "total_winning": -3470,
     "history": [
       {
         "date": "2026-02-25",
@@ -123,15 +179,27 @@
       {
         "date": "2026-03-02",
         "winning": -1500
+      },
+      {
+        "date": "2026-03-11",
+        "winning": -850
+      },
+      {
+        "date": "2026-03-12",
+        "winning": -1000
+      },
+      {
+        "date": "2026-03-13",
+        "winning": -1500
       }
     ]
   },
   "abhi": {
-    "total_winning": 5070,
+    "total_winning": 3470,
     "history": [
       {
         "date": "2026-02-25",
-        "winning": 2600
+        "winning": 2400
       },
       {
         "date": "2026-03-01",
@@ -140,11 +208,15 @@
       {
         "date": "2026-03-02",
         "winning": 400
+      },
+      {
+        "date": "2026-03-12",
+        "winning": -1500
       }
     ]
   },
   "mathur": {
-    "total_winning": -3000,
+    "total_winning": 6700,
     "history": [
       {
         "date": "2026-03-01",
@@ -153,24 +225,40 @@
       {
         "date": "2026-03-02",
         "winning": -2000
+      },
+      {
+        "date": "2026-03-12",
+        "winning": 4900
+      },
+      {
+        "date": "2026-03-13",
+        "winning": 4800
       }
     ]
   },
   "vaibhav": {
-    "total_winning": -2500,
+    "total_winning": -7000,
     "history": [
       {
         "date": "2026-03-01",
         "winning": -2500
+      },
+      {
+        "date": "2026-03-11",
+        "winning": -2500
+      },
+      {
+        "date": "2026-03-13",
+        "winning": -2000
       }
     ]
   },
   "hasan": {
-    "total_winning": 590,
+    "total_winning": 490,
     "history": [
       {
         "date": "2026-03-02",
-        "winning": 590
+        "winning": 490
       }
     ]
   },
@@ -193,11 +281,41 @@
     ]
   },
   "bansal": {
-    "total_winning": -1500,
+    "total_winning": -4690,
     "history": [
       {
         "date": "2026-03-06",
         "winning": -1500
+      },
+      {
+        "date": "2026-03-11",
+        "winning": 210
+      },
+      {
+        "date": "2026-03-12",
+        "winning": -400
+      },
+      {
+        "date": "2026-03-13",
+        "winning": -3000
+      }
+    ]
+  },
+  "subo": {
+    "total_winning": -500,
+    "history": [
+      {
+        "date": "2026-03-11",
+        "winning": -500
+      }
+    ]
+  },
+  "eashan": {
+    "total_winning": 200,
+    "history": [
+      {
+        "date": "2026-03-13",
+        "winning": 200
       }
     ]
   }

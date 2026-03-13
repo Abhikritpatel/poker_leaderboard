@@ -1,0 +1,427 @@
+{
+  "players": {
+    "hitarth": {
+      "total_winning": 7530,
+      "all_time_total_buy_ins": 0
+    },
+    "kamboj": {
+      "total_winning": -1930,
+      "all_time_total_buy_ins": 0
+    },
+    "dhruvsingh": {
+      "total_winning": -1320,
+      "all_time_total_buy_ins": 0
+    },
+    "kevin": {
+      "total_winning": -3220,
+      "all_time_total_buy_ins": 0
+    },
+    "daksh": {
+      "total_winning": -1550,
+      "all_time_total_buy_ins": 0
+    },
+    "ganju": {
+      "total_winning": 8020,
+      "all_time_total_buy_ins": 0
+    },
+    "sammy": {
+      "total_winning": -3470,
+      "all_time_total_buy_ins": 0
+    },
+    "abhi": {
+      "total_winning": 3470,
+      "all_time_total_buy_ins": 0
+    },
+    "mathur": {
+      "total_winning": 6700,
+      "all_time_total_buy_ins": 0
+    },
+    "vaibhav": {
+      "total_winning": -7000,
+      "all_time_total_buy_ins": 0
+    },
+    "hasan": {
+      "total_winning": 490,
+      "all_time_total_buy_ins": 0
+    },
+    "herrick": {
+      "total_winning": -1100,
+      "all_time_total_buy_ins": 0
+    },
+    "agrim": {
+      "total_winning": -1600,
+      "all_time_total_buy_ins": 0
+    },
+    "bansal": {
+      "total_winning": -4690,
+      "all_time_total_buy_ins": 0
+    },
+    "subo": {
+      "total_winning": -500,
+      "all_time_total_buy_ins": 0
+    },
+    "eashan": {
+      "total_winning": 200,
+      "all_time_total_buy_ins": 0
+    }
+  },
+  "games": [
+    {
+      "game_id": "13aa4f8f-8103-4e9c-b514-e77251be3d1d",
+      "date": "2026-02-25",
+      "chip_ratio": 5,
+      "total_game_buy_ins": 0,
+      "transactions": [
+        {
+          "name": "hitarth",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 4080
+        },
+        {
+          "name": "hitarth",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 3870
+        },
+        {
+          "name": "kamboj",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -120
+        },
+        {
+          "name": "kamboj",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -1560
+        },
+        {
+          "name": "dhruvsingh",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -1500
+        },
+        {
+          "name": "dhruvsingh",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -2500
+        },
+        {
+          "name": "kevin",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -1620
+        },
+        {
+          "name": "kevin",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -1000
+        },
+        {
+          "name": "daksh",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -600
+        },
+        {
+          "name": "daksh",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -950
+        },
+        {
+          "name": "ganju",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -220
+        },
+        {
+          "name": "sammy",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 320
+        },
+        {
+          "name": "abhi",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 2400
+        }
+      ]
+    },
+    {
+      "game_id": "761d3b68-e6e1-4c35-b3b6-e94bd5f808e7",
+      "date": "2026-03-06",
+      "chip_ratio": 5,
+      "total_game_buy_ins": 0,
+      "transactions": [
+        {
+          "name": "hitarth",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -1000
+        },
+        {
+          "name": "kamboj",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 3950
+        },
+        {
+          "name": "dhruvsingh",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 0
+        },
+        {
+          "name": "kevin",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 750
+        },
+        {
+          "name": "herrick",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -1100
+        },
+        {
+          "name": "agrim",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -1600
+        },
+        {
+          "name": "bansal",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -1500
+        }
+      ]
+    },
+    {
+      "game_id": "c3c37c98-bd20-402e-b6ab-2a8fe226c527",
+      "date": "2026-03-11",
+      "chip_ratio": 5,
+      "total_game_buy_ins": 0,
+      "transactions": [
+        {
+          "name": "hitarth",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -1920
+        },
+        {
+          "name": "kamboj",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 3500
+        },
+        {
+          "name": "dhruvsingh",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 2350
+        },
+        {
+          "name": "kevin",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -1000
+        },
+        {
+          "name": "ganju",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 740
+        },
+        {
+          "name": "sammy",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -850
+        },
+        {
+          "name": "vaibhav",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -2500
+        },
+        {
+          "name": "bansal",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 210
+        },
+        {
+          "name": "subo",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -500
+        }
+      ]
+    },
+    {
+      "game_id": "c24992e2-f137-49ed-8aae-bc1ac9d51f3b",
+      "date": "2026-03-12",
+      "chip_ratio": 5,
+      "total_game_buy_ins": 0,
+      "transactions": [
+        {
+          "name": "hitarth",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 2500
+        },
+        {
+          "name": "kamboj",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -5000
+        },
+        {
+          "name": "dhruvsingh",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -4000
+        },
+        {
+          "name": "kevin",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -3000
+        },
+        {
+          "name": "ganju",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 7500
+        },
+        {
+          "name": "sammy",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -1000
+        },
+        {
+          "name": "abhi",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -1500
+        },
+        {
+          "name": "mathur",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 4900
+        },
+        {
+          "name": "bansal",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -400
+        }
+      ]
+    },
+    {
+      "game_id": "5aa7ede6-cf29-4d42-a657-0d2258aac726",
+      "date": "2026-03-01",
+      "chip_ratio": 5,
+      "total_game_buy_ins": 0,
+      "transactions": [
+        {
+          "name": "kamboj",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -1700
+        },
+        {
+          "name": "dhruvsingh",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 1030
+        },
+        {
+          "name": "kevin",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 1040
+        },
+        {
+          "name": "sammy",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 1060
+        },
+        {
+          "name": "abhi",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 2070
+        },
+        {
+          "name": "mathur",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -1000
+        },
+        {
+          "name": "vaibhav",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -2500
+        }
+      ]
+    },
+    {
+      "game_id": "1fb250ea-a03a-47dc-8975-2518302e4e6a",
+      "date": "2026-03-02",
+      "chip_ratio": 5,
+      "total_game_buy_ins": 0,
+      "transactions": [
+        {
+          "name": "kamboj",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -2500
+        },
+        {
+          "name": "dhruvsingh",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 800
+        },
+        {
+          "name": "kevin",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 4110
+        },
+        {
+          "name": "sammy",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -1500
+        },
+        {
+          "name": "abhi",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 400
+        },
+        {
+          "name": "mathur",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -2000
+        },
+        {
+          "name": "hasan",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 490
+        }
+      ]
+    },
+    {
+      "game_id": "98e96f1e-7542-4603-bcf0-d201355dd7c0",
+      "date": "2026-03-13",
+      "chip_ratio": 5,
+      "total_game_buy_ins": 0,
+      "transactions": [
+        {
+          "name": "kamboj",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 1500
+        },
+        {
+          "name": "dhruvsingh",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 2500
+        },
+        {
+          "name": "kevin",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -2500
+        },
+        {
+          "name": "sammy",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -1500
+        },
+        {
+          "name": "mathur",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 4800
+        },
+        {
+          "name": "vaibhav",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -2000
+        },
+        {
+          "name": "bansal",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -3000
+        },
+        {
+          "name": "eashan",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 200
+        }
+      ]
+    }
+    
+  ]
+}
