@@ -1,77 +1,73 @@
 {
   "players": {
     "hitarth": {
-      "total_winning": 2036.0,
-      "all_time_total_buy_ins": 49
+      "total_winning": 7530,
+      "all_time_total_buy_ins": 0
     },
     "kamboj": {
-      "total_winning": -2644.0,
-      "all_time_total_buy_ins": 28
+      "total_winning": -1930,
+      "all_time_total_buy_ins": 0
     },
     "dhruvsingh": {
-      "total_winning": 1336.0,
-      "all_time_total_buy_ins": 12
+      "total_winning": -1320,
+      "all_time_total_buy_ins": 0
     },
     "kevin": {
-      "total_winning": -996.0,
-      "all_time_total_buy_ins": 10
+      "total_winning": -3220,
+      "all_time_total_buy_ins": 0
     },
     "daksh": {
-      "total_winning": -310.0,
+      "total_winning": -1550,
       "all_time_total_buy_ins": 0
     },
     "ganju": {
-      "total_winning": 1118.0,
-      "all_time_total_buy_ins": 11
+      "total_winning": 8020,
+      "all_time_total_buy_ins": 0
     },
     "sammy": {
-      "total_winning": -1834.0,
-      "all_time_total_buy_ins": 13
+      "total_winning": -3470,
+      "all_time_total_buy_ins": 0
     },
     "abhi": {
-      "total_winning": -818.0,
-      "all_time_total_buy_ins": 25
+      "total_winning": 3470,
+      "all_time_total_buy_ins": 0
     },
     "mathur": {
-      "total_winning": 1336.0,
-      "all_time_total_buy_ins": 9
+      "total_winning": 6700,
+      "all_time_total_buy_ins": 0
     },
     "vaibhav": {
-      "total_winning": -122.0,
-      "all_time_total_buy_ins": 20
+      "total_winning": -7000,
+      "all_time_total_buy_ins": 0
     },
     "hasan": {
-      "total_winning": 98.0,
+      "total_winning": 490,
       "all_time_total_buy_ins": 0
     },
     "herrick": {
-      "total_winning": -220.0,
+      "total_winning": -1100,
       "all_time_total_buy_ins": 0
     },
     "agrim": {
-      "total_winning": -320.0,
+      "total_winning": -1600,
       "all_time_total_buy_ins": 0
     },
     "bansal": {
-      "total_winning": -866.0,
-      "all_time_total_buy_ins": 18
+      "total_winning": -4690,
+      "all_time_total_buy_ins": 0
     },
     "subo": {
-      "total_winning": -572.0,
-      "all_time_total_buy_ins": 5
+      "total_winning": -500,
+      "all_time_total_buy_ins": 0
     },
     "eashan": {
-      "total_winning": -260.0,
-      "all_time_total_buy_ins": 3
-    },
-    "sagnik": {
-      "total_winning": 3044.0,
-      "all_time_total_buy_ins": 7
+      "total_winning": 200,
+      "all_time_total_buy_ins": 0
     }
-  },      
+  },
   "games": [
     {
-      "game_id": "8bce7579-2b1b-4373-b200-85062ada1079",
+      "game_id": "13aa4f8f-8103-4e9c-b514-e77251be3d1d",
       "date": "2026-02-25",
       "chip_ratio": 5,
       "total_game_buy_ins": 0,
@@ -144,7 +140,7 @@
       ]
     },
     {
-      "game_id": "001d17eb-a287-4b10-9b65-78045d83f0e1",
+      "game_id": "761d3b68-e6e1-4c35-b3b6-e94bd5f808e7",
       "date": "2026-03-06",
       "chip_ratio": 5,
       "total_game_buy_ins": 0,
@@ -187,7 +183,7 @@
       ]
     },
     {
-      "game_id": "62023494-f2a5-49e7-9ae6-e82dc29c6d49",
+      "game_id": "c3c37c98-bd20-402e-b6ab-2a8fe226c527",
       "date": "2026-03-11",
       "chip_ratio": 5,
       "total_game_buy_ins": 0,
@@ -240,7 +236,7 @@
       ]
     },
     {
-      "game_id": "ed59a258-fa56-4cdd-84d0-458312257715",
+      "game_id": "c24992e2-f137-49ed-8aae-bc1ac9d51f3b",
       "date": "2026-03-12",
       "chip_ratio": 5,
       "total_game_buy_ins": 0,
@@ -293,7 +289,7 @@
       ]
     },
     {
-      "game_id": "8e598bc6-1355-4f02-8184-5f83621870fe",
+      "game_id": "5aa7ede6-cf29-4d42-a657-0d2258aac726",
       "date": "2026-03-01",
       "chip_ratio": 5,
       "total_game_buy_ins": 0,
@@ -336,7 +332,7 @@
       ]
     },
     {
-      "game_id": "2cc5ba50-00a9-409e-a923-c5391dee0930",
+      "game_id": "1fb250ea-a03a-47dc-8975-2518302e4e6a",
       "date": "2026-03-02",
       "chip_ratio": 5,
       "total_game_buy_ins": 0,
@@ -379,7 +375,7 @@
       ]
     },
     {
-      "game_id": "3e53c514-ae48-406e-a5c9-24af5cc1e56d",
+      "game_id": "98e96f1e-7542-4603-bcf0-d201355dd7c0",
       "date": "2026-03-13",
       "chip_ratio": 5,
       "total_game_buy_ins": 0,
@@ -425,210 +421,7 @@
           "winning_this_game": 200
         }
       ]
-    },
-    {
-      "game_id": "442444ac-d6a8-4b97-9c10-cee6996e9792",
-      "date": "2026-03-14",
-      "chip_ratio": 5,
-      "total_buy_ins": 63,
-      "transactions": [
-        {
-          "name": "Ganju",
-          "buy_ins": 7,
-          "end_chips": 140,
-          "profit_inr": -672.0
-        },
-        {
-          "name": "Kamboj",
-          "buy_ins": 6,
-          "end_chips": 140,
-          "profit_inr": -572.0
-        },
-        {
-          "name": "Sammy",
-          "buy_ins": 8,
-          "end_chips": 140,
-          "profit_inr": -772.0
-        },
-        {
-          "name": "Vaibhav",
-          "buy_ins": 10,
-          "end_chips": 2660,
-          "profit_inr": -468.0
-        },
-        {
-          "name": "Abhi",
-          "buy_ins": 4,
-          "end_chips": 140,
-          "profit_inr": -372.0
-        },
-        {
-          "name": "Hitarth",
-          "buy_ins": 16,
-          "end_chips": 5120,
-          "profit_inr": -576.0
-        },
-        {
-          "name": "Dhruvsingh",
-          "buy_ins": 1,
-          "end_chips": 14000,
-          "profit_inr": 2700.0
-        },
-        {
-          "name": "bansal",
-          "buy_ins": 8,
-          "end_chips": 5410,
-          "profit_inr": 282.0
-        },
-        {
-          "name": "Mathur",
-          "buy_ins": 2,
-          "end_chips": 3610,
-          "profit_inr": 522.0
-        },
-        {
-          "name": "Subo",
-          "buy_ins": 1,
-          "end_chips": 140,
-          "profit_inr": -72.0
-        }
-      ]
-    },
-    {
-      "game_id": "c15eaa8f-2743-4b4c-a614-c45f058ac5fe",
-      "date": "2026-03-17",
-      "chip_ratio": 5,
-      "total_buy_ins": 74,
-      "transactions": [
-        {
-          "name": "Dhruvsingh",
-          "buy_ins": 11,
-          "end_chips": 0,
-          "profit_inr": -1100.0
-        },
-        {
-          "name": "Kamboj",
-          "buy_ins": 10,
-          "end_chips": 2260,
-          "profit_inr": -548.0
-        },
-        {
-          "name": "Kevin",
-          "buy_ins": 8,
-          "end_chips": 0,
-          "profit_inr": -800.0
-        },
-        {
-          "name": "Mathur",
-          "buy_ins": 5,
-          "end_chips": 0,
-          "profit_inr": -500.0
-        },
-        {
-          "name": "Sagnik",
-          "buy_ins": 2,
-          "end_chips": 8250,
-          "profit_inr": 1450.0
-        },
-        {
-          "name": "Hitarth",
-          "buy_ins": 18,
-          "end_chips": 15070,
-          "profit_inr": 1214.0
-        },
-        {
-          "name": "Vaibhav",
-          "buy_ins": 6,
-          "end_chips": 10760,
-          "profit_inr": 1552.0
-        },
-        {
-          "name": "Sammy",
-          "buy_ins": 5,
-          "end_chips": 660,
-          "profit_inr": -368.0
-        },
-        {
-          "name": "Abhi",
-          "buy_ins": 9,
-          "end_chips": 0,
-          "profit_inr": -900.0
-        }
-      ]
-    },
-    {
-      "game_id": "61807403-fd64-4a03-8a43-1cabe13b0de7",
-      "date": "2026-03-19",
-      "chip_ratio": 5,
-      "total_buy_ins": 73,
-      "transactions": [
-        {
-          "name": "Abhi",
-          "buy_ins": 12,
-          "end_chips": 4800,
-          "profit_inr": -240.0
-        },
-        {
-          "name": "Hitarth",
-          "buy_ins": 15,
-          "end_chips": 6960,
-          "profit_inr": -108.0
-        },
-        {
-          "name": "Vaibhav",
-          "buy_ins": 4,
-          "end_chips": 2970,
-          "profit_inr": 194.0
-        },
-        {
-          "name": "Kamboj",
-          "buy_ins": 12,
-          "end_chips": 310,
-          "profit_inr": -1138.0
-        },
-        {
-          "name": "Ganju",
-          "buy_ins": 4,
-          "end_chips": 2930,
-          "profit_inr": 186.0
-        },
-        {
-          "name": "Sagnik",
-          "buy_ins": 5,
-          "end_chips": 10470,
-          "profit_inr": 1594.0
-        },
-        {
-          "name": "Subo",
-          "buy_ins": 4,
-          "end_chips": 0,
-          "profit_inr": -400.0
-        },
-        {
-          "name": "eashan",
-          "buy_ins": 3,
-          "end_chips": 0,
-          "profit_inr": -300.0
-        },
-        {
-          "name": "Mathur",
-          "buy_ins": 2,
-          "end_chips": 870,
-          "profit_inr": -26.0
-        },
-        {
-          "name": "Kevin",
-          "buy_ins": 2,
-          "end_chips": 3240,
-          "profit_inr": 448.0
-        },
-        {
-          "name": "Bansal",
-          "buy_ins": 10,
-          "end_chips": 3950,
-          "profit_inr": -210.0
-        }
-      ]
     }
+    
   ]
 }

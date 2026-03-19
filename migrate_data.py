@@ -17,8 +17,9 @@ def migrate_database():
     games_by_date={}
 
     for player_name,stats in old_data.items():
+        winning_inr=stats.get('total_winning')/5
         new_db["players"][player_name]={
-            "total_winning":stats.get('total_winning',0),
+            "total_winning":winning_inr,
             "all_time_total_buy_ins":0
         }
 

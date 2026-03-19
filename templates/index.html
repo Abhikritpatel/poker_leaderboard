@@ -90,12 +90,64 @@
         tr:nth-child(even) {
                 background-color: #1c2128; /* Subtle striping for readability */
         }
+        /* Container for the dropdown and date pickers */
+        .filter-container {
+                text-align: center;
+                margin-bottom: 20px;
+        }
+
+        /* Styling the dropdown to match your dark theme */
+        #time_frame_select {
+                background-color: #0d1117;
+                color: #c9d1d9;
+                border: 1px solid #30363d;
+                padding: 8px 15px;
+                border-radius: 6px;
+                font-size: 1em;
+        }
+
+        /* The critical "Hidden" state and layout */
+        #custom_date_controls {
+                display: none; /* This keeps it hidden by default */
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+                margin-top: 15px;
+        }
+
+        /* Ensure the date inputs don't stretch to 100% width */
+        #custom_date_controls input[type="date"] {
+                width: auto;
+                margin-bottom: 0;
+        }
+
+        #custom_date_controls button {
+                width: auto;
+        }
         </style>
 
 </head>
 
 <body> 
     <div id="leaderboard-view">
+
+        <div class="filter-container">
+        <select id="time_frame_select">
+                <option value="all"> All Time </option>
+                <option value="week"> Past 7 days</option>
+                <option value="month"> Past 30 days</option>
+                <option value="custom"> Custom date range</option>
+        </select>
+        <div id="custom_date_controls">
+                <input type="date" id="start_date">
+                <span>TO</span>
+                <input type="date" id="end_date">
+                <button id="apply_custom_date_btn">Apply</button>
+
+        </div>
+
+
+    </div>
         <h1 style="text-align: center;">Poker Hall of Fame 🏆</h1>
         
         <div id="leaderboard_display"> Loading leaderboard... </div>
@@ -162,6 +214,8 @@
         </div>
     </template>
 
+  
+
 <script>
 
        
@@ -202,14 +256,18 @@
         add_player_row();
 
 
-        function get_leaderboard(){
-                fetch('/api/leaderboard',{
+        function get_leaderboard(time_frame='all'){
+                fetch( `/api/leaderboard?timeframe=${time_frame}`,{
                         method:'GET',
                 })
                 .then(response=>response.json())
                 .then(result=>{
                         let tableHTML="<table>"
-                        tableHTML += "<tr><th>Rank</th> <th>Player</th><th>All Time Winning </th></tr>";
+                        let headertext="All Time Winning(INR)"
+                        if(time_frame=='week') headertext="Past 7 days"
+                        if(time_frame=='month') headertext='Past 30 days'
+                        if(time_frame=='custom') headertext='Custom Range'
+                        tableHTML += `<tr><th>Rank</th> <th>Player</th><th>${headertext} </th></tr>`;
 
                         for(let i=0;i<result.length;i++){
                                 let player=result[i];
@@ -330,6 +388,34 @@
         });
 
 });
+
+        const timeframeselect=document.getElementById('time_frame_select');
+        const customDateControls=document.getElementById('custom_date_controls');
+        const applyCustomDatebtn=document.getElementById('apply_custom_date_btn');
+        const startDate=document.getElementById('start_date');
+        const endDate=document.getElementById('end_date');
+        timeframeselect.addEventListener('change',() =>{
+                const selected_value=timeframeselect.value;
+                if(selected_value=='custom'){
+                        customDateControls.style.display='flex';
+                        
+                }
+                else{
+                        customDateControls.style.display='none';
+                        get_leaderboard(selected_value)
+                }
+                
+        });
+        applyCustomDatebtn.addEventListener('click',()=>{
+                        const start=startDate.value;
+                        const end=endDate.value;
+                        if(!start || !end){
+                                alert('Please select both dates');
+                                return;
+                        }
+                        daterange=`custom&start=${start}&end=${end}`
+                        get_leaderboard(daterange)
+        });
 </script>
 
 

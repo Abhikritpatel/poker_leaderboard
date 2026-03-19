@@ -1,92 +1,124 @@
 from flask import Flask,jsonify,request,render_template
 import json
-from datetime import datetime
+from datetime import datetime,timedelta
 import uuid
 
 app=Flask(__name__)
 app.json.sort_keys=False
 
-def get_sorted_leaderboard():
+def get_sorted_leaderboard(start=None,end=None,timeframe='all'):
     try:
         with open("database.json", 'r') as f:
-            db = json.load(f)
+                db = json.load(f)
 
-        
-        
+        if(timeframe=='all'):
+                leaderboard_list=[]
+                players=db.get('players')
 
-        leaderboard_list=[]
-        players=db.get('players')
+                for name,stats in players.items():
+                    print(f"DEBUG: Player {name} has {stats.get('total_winning')} (Type: {type(stats.get('total_winning'))})")
 
-        for name,stats in players.items():
-            print(f"DEBUG: Player {name} has {stats.get('total_winning')} (Type: {type(stats.get('total_winning'))})")
+                for name,stats in players.items():
+                    leaderboard_list.append({
+                        'name':name,
+                        'total_winning':stats.get('total_winning')
+                    })
+                
+                sorted_items=sorted(
+                    leaderboard_list,
+                    key=lambda item: int(item['total_winning']),
+                    reverse=True
+                )
+            
+                return sorted_items
 
-        for name,stats in players.items():
-            leaderboard_list.append({
-                'name':name,
-                'total_winning':stats.get('total_winning')
-            })
-        
-        sorted_items=sorted(
-            leaderboard_list,
-            key=lambda item: int(item['total_winning']),
-            reverse=True
-        )
-     
-        return sorted_items
-    
+        else:
+                games=db.get('games',[])
+                totals={}
+
+                for game in games:
+                    game_date=game.get('date')
+                    if(start<=game_date<=end):
+                        transactions=game.get('transactions')
+                        for ts in transactions:
+                            name=ts.get('name')
+                            profit=int(ts.get('winning_this_game',0))
+
+                            if name not in totals:
+                                totals[name]=0
+
+                            totals[name]+=profit
+
+
+                leaderboard_list=[]
+                for name,total in totals.items():
+                    leaderboard_list.append({
+                        'name':name,
+                        'total_winning':total
+                    })
+
+                
+                sorted_items=sorted(leaderboard_list,key=lambda item:int(item['total_winning']),reverse=True)
+
+                return sorted_items
 
     except Exception as e:
         print(f"Error during sort: {e}")
         return []
-
-
-
-@app.route('/api/add_win',methods=['POST'])
-def add_win():
-    data=request.get_json()
-
-    name=data.get('name','').lower()
-    today=datetime.now().strftime('%Y-%m-%d')
-    submitted_date=data.get('date')
-    if(submitted_date==""): date=today
-    else: date=submitted_date
-
-    amount=(data.get('winning',0))
-    
-    if not name:
-        return jsonify({"status": "error", "message": "Name is required"}), 400
-    
-    if not isinstance(amount,(int,float)):
-        return jsonify({"status":"error","message":"Winning must be a number"}),400
-
-    try:
-        with open('data.json','r') as f:
-            players=json.load(f)
-
-        if name not in players:
-            players[name]={
-                "total_winning":0,
-                "history":[]
-            }
-        
-        if name in players:
-            players[name]['total_winning']+=amount
-            players[name]['history'].append(
-                {
-                    'date':date,
-                    'winning':amount
                     
-                }
-            )
-            with open('data.json','w') as f:
-                json.dump(players,f,indent=2)
 
-            return jsonify({"status":"success", "message": f'{amount} added to {name}'}),200
+            
+
+            
+
+
+
+# @app.route('/api/add_win',methods=['POST'])
+# def add_win():
+#     data=request.get_json()
+
+#     name=data.get('name','').lower()
+#     today=datetime.now().strftime('%Y-%m-%d')
+#     submitted_date=data.get('date')
+#     if(submitted_date==""): date=today
+#     else: date=submitted_date
+
+#     amount=(data.get('winning',0))
     
-        return jsonify({"status":"error","message":"player not found"}),404
+#     if not name:
+#         return jsonify({"status": "error", "message": "Name is required"}), 400
     
-    except Exception as e:
-        return jsonify({"status":"error","message":str(e)}),500
+#     if not isinstance(amount,(int,float)):
+#         return jsonify({"status":"error","message":"Winning must be a number"}),400
+
+#     try:
+#         with open('data.json','r') as f:
+#             players=json.load(f)
+
+#         if name not in players:
+#             players[name]={
+#                 "total_winning":0,
+#                 "history":[]
+#             }
+        
+#         if name in players:
+#             players[name]['total_winning']+=amount
+#             players[name]['history'].append(
+#                 {
+#                     'date':date,
+#                     'winning':amount
+                    
+#                 }
+#             )
+#             with open('data.json','w') as f:
+#                 json.dump(players,f,indent=2)
+
+#             return jsonify({"status":"success", "message": f'{amount} added to {name}'}),200
+    
+#         return jsonify({"status":"error","message":"player not found"}),404
+    
+#     except Exception as e:
+#         return jsonify({"status":"error","message":str(e)}),500
     
 
 
@@ -179,7 +211,25 @@ def add_game():
 
 @app.route('/api/leaderboard',methods=['GET'])
 def leaderboard():
-    data=get_sorted_leaderboard()
+    timeframe=request.args.get('timeframe','all')
+    start=request.args.get('start')
+    end=request.args.get('end')
+
+    todaydate=datetime.now()
+    today_str = todaydate.strftime('%Y-%m-%d')
+    if(timeframe=='week'):
+        prevdate_str=(todaydate-timedelta(days=7)).strftime('%Y-%m-%d')
+        data=get_sorted_leaderboard(prevdate_str,today_str,timeframe='week')
+    elif(timeframe=='month'):
+        prevdate_str=(todaydate-timedelta(days=30)).strftime('%Y-%m-%d')
+        data=get_sorted_leaderboard(prevdate_str,today_str,timeframe='month')
+    elif(timeframe=='custom') and start and end:
+        start_date=datetime.strptime(start,'%Y-%m-%d')
+        end_date=datetime.strptime(end,'%Y-%m-%d')
+        data=get_sorted_leaderboard(start,end,timeframe='custom')
+    else:
+        data=get_sorted_leaderboard()
+        
     return jsonify(data)
 
 @app.route('/')
