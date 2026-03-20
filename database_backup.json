@@ -1,0 +1,700 @@
+{
+  "players": {
+    "hitarth": {
+      "total_winning": 2196.0,
+      "all_time_total_buy_ins": 54
+    },
+    "kamboj": {
+      "total_winning": -2844.0,
+      "all_time_total_buy_ins": 33
+    },
+    "dhruvsingh": {
+      "total_winning": 2536.0,
+      "all_time_total_buy_ins": 23
+    },
+    "kevin": {
+      "total_winning": -1596.0,
+      "all_time_total_buy_ins": 16
+    },
+    "daksh": {
+      "total_winning": -310.0,
+      "all_time_total_buy_ins": 0
+    },
+    "ganju": {
+      "total_winning": 1118.0,
+      "all_time_total_buy_ins": 11
+    },
+    "sammy": {
+      "total_winning": -1834.0,
+      "all_time_total_buy_ins": 13
+    },
+    "abhi": {
+      "total_winning": -1536.0,
+      "all_time_total_buy_ins": 39
+    },
+    "mathur": {
+      "total_winning": 1136.0,
+      "all_time_total_buy_ins": 13
+    },
+    "vaibhav": {
+      "total_winning": -702.0,
+      "all_time_total_buy_ins": 36
+    },
+    "hasan": {
+      "total_winning": 98.0,
+      "all_time_total_buy_ins": 0
+    },
+    "herrick": {
+      "total_winning": -220.0,
+      "all_time_total_buy_ins": 0
+    },
+    "agrim": {
+      "total_winning": -320.0,
+      "all_time_total_buy_ins": 0
+    },
+    "bansal": {
+      "total_winning": 272.0,
+      "all_time_total_buy_ins": 19
+    },
+    "subo": {
+      "total_winning": -572.0,
+      "all_time_total_buy_ins": 5
+    },
+    "eashan": {
+      "total_winning": -260.0,
+      "all_time_total_buy_ins": 3
+    },
+    "sagnik": {
+      "total_winning": 3044.0,
+      "all_time_total_buy_ins": 7
+    },
+    "kaustav": {
+      "total_winning": -200.0,
+      "all_time_total_buy_ins": 2
+    }
+  },
+  "games": [
+    {
+      "game_id": "8bce7579-2b1b-4373-b200-85062ada1079",
+      "date": "2026-02-25",
+      "chip_ratio": 5,
+      "total_game_buy_ins": 0,
+      "transactions": [
+        {
+          "name": "hitarth",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 4080
+        },
+        {
+          "name": "hitarth",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 3870
+        },
+        {
+          "name": "kamboj",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -120
+        },
+        {
+          "name": "kamboj",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -1560
+        },
+        {
+          "name": "dhruvsingh",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -1500
+        },
+        {
+          "name": "dhruvsingh",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -2500
+        },
+        {
+          "name": "kevin",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -1620
+        },
+        {
+          "name": "kevin",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -1000
+        },
+        {
+          "name": "daksh",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -600
+        },
+        {
+          "name": "daksh",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -950
+        },
+        {
+          "name": "ganju",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -220
+        },
+        {
+          "name": "sammy",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 320
+        },
+        {
+          "name": "abhi",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 2400
+        }
+      ]
+    },
+    {
+      "game_id": "001d17eb-a287-4b10-9b65-78045d83f0e1",
+      "date": "2026-03-06",
+      "chip_ratio": 5,
+      "total_game_buy_ins": 0,
+      "transactions": [
+        {
+          "name": "hitarth",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -1000
+        },
+        {
+          "name": "kamboj",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 3950
+        },
+        {
+          "name": "dhruvsingh",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 0
+        },
+        {
+          "name": "kevin",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 750
+        },
+        {
+          "name": "herrick",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -1100
+        },
+        {
+          "name": "agrim",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -1600
+        },
+        {
+          "name": "bansal",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -1500
+        }
+      ]
+    },
+    {
+      "game_id": "62023494-f2a5-49e7-9ae6-e82dc29c6d49",
+      "date": "2026-03-11",
+      "chip_ratio": 5,
+      "total_game_buy_ins": 0,
+      "transactions": [
+        {
+          "name": "hitarth",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -1920
+        },
+        {
+          "name": "kamboj",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 3500
+        },
+        {
+          "name": "dhruvsingh",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 2350
+        },
+        {
+          "name": "kevin",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -1000
+        },
+        {
+          "name": "ganju",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 740
+        },
+        {
+          "name": "sammy",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -850
+        },
+        {
+          "name": "vaibhav",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -2500
+        },
+        {
+          "name": "bansal",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 210
+        },
+        {
+          "name": "subo",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -500
+        }
+      ]
+    },
+    {
+      "game_id": "ed59a258-fa56-4cdd-84d0-458312257715",
+      "date": "2026-03-12",
+      "chip_ratio": 5,
+      "total_game_buy_ins": 0,
+      "transactions": [
+        {
+          "name": "hitarth",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 2500
+        },
+        {
+          "name": "kamboj",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -5000
+        },
+        {
+          "name": "dhruvsingh",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -4000
+        },
+        {
+          "name": "kevin",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -3000
+        },
+        {
+          "name": "ganju",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 7500
+        },
+        {
+          "name": "sammy",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -1000
+        },
+        {
+          "name": "abhi",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -1500
+        },
+        {
+          "name": "mathur",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 4900
+        },
+        {
+          "name": "bansal",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -400
+        }
+      ]
+    },
+    {
+      "game_id": "8e598bc6-1355-4f02-8184-5f83621870fe",
+      "date": "2026-03-01",
+      "chip_ratio": 5,
+      "total_game_buy_ins": 0,
+      "transactions": [
+        {
+          "name": "kamboj",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -1700
+        },
+        {
+          "name": "dhruvsingh",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 1030
+        },
+        {
+          "name": "kevin",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 1040
+        },
+        {
+          "name": "sammy",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 1060
+        },
+        {
+          "name": "abhi",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 2070
+        },
+        {
+          "name": "mathur",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -1000
+        },
+        {
+          "name": "vaibhav",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -2500
+        }
+      ]
+    },
+    {
+      "game_id": "2cc5ba50-00a9-409e-a923-c5391dee0930",
+      "date": "2026-03-02",
+      "chip_ratio": 5,
+      "total_game_buy_ins": 0,
+      "transactions": [
+        {
+          "name": "kamboj",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -2500
+        },
+        {
+          "name": "dhruvsingh",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 800
+        },
+        {
+          "name": "kevin",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 4110
+        },
+        {
+          "name": "sammy",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -1500
+        },
+        {
+          "name": "abhi",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 400
+        },
+        {
+          "name": "mathur",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -2000
+        },
+        {
+          "name": "hasan",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 490
+        }
+      ]
+    },
+    {
+      "game_id": "3e53c514-ae48-406e-a5c9-24af5cc1e56d",
+      "date": "2026-03-13",
+      "chip_ratio": 5,
+      "total_game_buy_ins": 0,
+      "transactions": [
+        {
+          "name": "kamboj",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 1500
+        },
+        {
+          "name": "dhruvsingh",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 2500
+        },
+        {
+          "name": "kevin",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -2500
+        },
+        {
+          "name": "sammy",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -1500
+        },
+        {
+          "name": "mathur",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 4800
+        },
+        {
+          "name": "vaibhav",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -2000
+        },
+        {
+          "name": "bansal",
+          "buy_ins_this_game": 0,
+          "winning_this_game": -3000
+        },
+        {
+          "name": "eashan",
+          "buy_ins_this_game": 0,
+          "winning_this_game": 200
+        }
+      ]
+    },
+    {
+      "game_id": "442444ac-d6a8-4b97-9c10-cee6996e9792",
+      "date": "2026-03-14",
+      "chip_ratio": 5,
+      "total_buy_ins": 63,
+      "transactions": [
+        {
+          "name": "Ganju",
+          "buy_ins": 7,
+          "end_chips": 140,
+          "profit_inr": -672.0
+        },
+        {
+          "name": "Kamboj",
+          "buy_ins": 6,
+          "end_chips": 140,
+          "profit_inr": -572.0
+        },
+        {
+          "name": "Sammy",
+          "buy_ins": 8,
+          "end_chips": 140,
+          "profit_inr": -772.0
+        },
+        {
+          "name": "Vaibhav",
+          "buy_ins": 10,
+          "end_chips": 2660,
+          "profit_inr": -468.0
+        },
+        {
+          "name": "Abhi",
+          "buy_ins": 4,
+          "end_chips": 140,
+          "profit_inr": -372.0
+        },
+        {
+          "name": "Hitarth",
+          "buy_ins": 16,
+          "end_chips": 5120,
+          "profit_inr": -576.0
+        },
+        {
+          "name": "Dhruvsingh",
+          "buy_ins": 1,
+          "end_chips": 14000,
+          "profit_inr": 2700.0
+        },
+        {
+          "name": "bansal",
+          "buy_ins": 8,
+          "end_chips": 5410,
+          "profit_inr": 282.0
+        },
+        {
+          "name": "Mathur",
+          "buy_ins": 2,
+          "end_chips": 3610,
+          "profit_inr": 522.0
+        },
+        {
+          "name": "Subo",
+          "buy_ins": 1,
+          "end_chips": 140,
+          "profit_inr": -72.0
+        }
+      ]
+    },
+    {
+      "game_id": "c15eaa8f-2743-4b4c-a614-c45f058ac5fe",
+      "date": "2026-03-17",
+      "chip_ratio": 5,
+      "total_buy_ins": 74,
+      "transactions": [
+        {
+          "name": "Dhruvsingh",
+          "buy_ins": 11,
+          "end_chips": 0,
+          "profit_inr": -1100.0
+        },
+        {
+          "name": "Kamboj",
+          "buy_ins": 10,
+          "end_chips": 2260,
+          "profit_inr": -548.0
+        },
+        {
+          "name": "Kevin",
+          "buy_ins": 8,
+          "end_chips": 0,
+          "profit_inr": -800.0
+        },
+        {
+          "name": "Mathur",
+          "buy_ins": 5,
+          "end_chips": 0,
+          "profit_inr": -500.0
+        },
+        {
+          "name": "Sagnik",
+          "buy_ins": 2,
+          "end_chips": 8250,
+          "profit_inr": 1450.0
+        },
+        {
+          "name": "Hitarth",
+          "buy_ins": 18,
+          "end_chips": 15070,
+          "profit_inr": 1214.0
+        },
+        {
+          "name": "Vaibhav",
+          "buy_ins": 6,
+          "end_chips": 10760,
+          "profit_inr": 1552.0
+        },
+        {
+          "name": "Sammy",
+          "buy_ins": 5,
+          "end_chips": 660,
+          "profit_inr": -368.0
+        },
+        {
+          "name": "Abhi",
+          "buy_ins": 9,
+          "end_chips": 0,
+          "profit_inr": -900.0
+        }
+      ]
+    },
+    {
+      "game_id": "61807403-fd64-4a03-8a43-1cabe13b0de7",
+      "date": "2026-03-19",
+      "chip_ratio": 5,
+      "total_buy_ins": 73,
+      "transactions": [
+        {
+          "name": "Abhi",
+          "buy_ins": 12,
+          "end_chips": 4800,
+          "profit_inr": -240.0
+        },
+        {
+          "name": "Hitarth",
+          "buy_ins": 15,
+          "end_chips": 6960,
+          "profit_inr": -108.0
+        },
+        {
+          "name": "Vaibhav",
+          "buy_ins": 4,
+          "end_chips": 2970,
+          "profit_inr": 194.0
+        },
+        {
+          "name": "Kamboj",
+          "buy_ins": 12,
+          "end_chips": 310,
+          "profit_inr": -1138.0
+        },
+        {
+          "name": "Ganju",
+          "buy_ins": 4,
+          "end_chips": 2930,
+          "profit_inr": 186.0
+        },
+        {
+          "name": "Sagnik",
+          "buy_ins": 5,
+          "end_chips": 10470,
+          "profit_inr": 1594.0
+        },
+        {
+          "name": "Subo",
+          "buy_ins": 4,
+          "end_chips": 0,
+          "profit_inr": -400.0
+        },
+        {
+          "name": "eashan",
+          "buy_ins": 3,
+          "end_chips": 0,
+          "profit_inr": -300.0
+        },
+        {
+          "name": "Mathur",
+          "buy_ins": 2,
+          "end_chips": 870,
+          "profit_inr": -26.0
+        },
+        {
+          "name": "Kevin",
+          "buy_ins": 2,
+          "end_chips": 3240,
+          "profit_inr": 448.0
+        },
+        {
+          "name": "Bansal",
+          "buy_ins": 10,
+          "end_chips": 3950,
+          "profit_inr": -210.0
+        }
+      ]
+    },
+    {
+      "game_id": "671489f1-4994-4f45-822c-8b111ecbdd6a",
+      "date": "2026-03-20",
+      "chip_ratio": 5,
+      "total_buy_ins": 64,
+      "transactions": [
+        {
+          "name": "Abhi",
+          "buy_ins": 14,
+          "end_chips": 3410,
+          "profit_inr": -718.0
+        },
+        {
+          "name": "Dhruvsingh",
+          "buy_ins": 11,
+          "end_chips": 11500,
+          "profit_inr": 1200.0
+        },
+        {
+          "name": "Kevin",
+          "buy_ins": 6,
+          "end_chips": 0,
+          "profit_inr": -600.0
+        },
+        {
+          "name": "Mathur",
+          "buy_ins": 4,
+          "end_chips": 1000,
+          "profit_inr": -200.0
+        },
+        {
+          "name": "Hitarth",
+          "buy_ins": 5,
+          "end_chips": 3300,
+          "profit_inr": 160.0
+        },
+        {
+          "name": "Vaibhav",
+          "buy_ins": 16,
+          "end_chips": 5100,
+          "profit_inr": -580.0
+        },
+        {
+          "name": "Bansal",
+          "buy_ins": 1,
+          "end_chips": 6190,
+          "profit_inr": 1138.0
+        },
+        {
+          "name": "Kaustav",
+          "buy_ins": 2,
+          "end_chips": 0,
+          "profit_inr": -200.0
+        },
+        {
+          "name": "Kamboj",
+          "buy_ins": 5,
+          "end_chips": 1500,
+          "profit_inr": -200.0
+        }
+      ]
+    }
+  ]
+}

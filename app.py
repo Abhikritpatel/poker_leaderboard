@@ -42,7 +42,7 @@ def get_sorted_leaderboard(start=None,end=None,timeframe='all'):
                         transactions=game.get('transactions')
                         for ts in transactions:
                             name=ts.get('name')
-                            profit=int(ts.get('winning_this_game',0))
+                            profit=int(ts.get('profit_inr',0))
 
                             if name not in totals:
                                 totals[name]=0
@@ -153,11 +153,12 @@ def add_game():
     total_balance=0
     total_buy_ins=0
     for player in transactions:
+        player['name'] = player.get('name', '').lower().strip()
         endchips=player.get('end_chips',0)
         buy_ins=player.get('buy_ins',0)
         profit_loss=(endchips/chip_ratio)-(buy_in_amt*buy_ins)
         total_balance+=profit_loss
-        player['profit_inr']=profit_loss
+        player['profit_inr']=round(profit_loss,2)
         total_buy_ins+=buy_ins
 
     if round(total_balance,2)!=0:
