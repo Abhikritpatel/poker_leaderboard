@@ -1,4 +1,5 @@
 import os
+import re
 import uuid
 from datetime import datetime, timedelta
 from flask import Flask, jsonify, request, render_template
@@ -19,7 +20,7 @@ def get_db_connection():
         raise ValueError("DATABASE_URL is not set in environment or .env file.")
     return psycopg2.connect(DATABASE_URL)
 
-def get_sorted_leaderboard(start=None, end=None, timeframe='all'):
+def get_sorted_leaderboard(start=None, end=None, timeframe='all', group_id='main'):
     try:
         conn = get_db_connection()
         cur = conn.cursor(cursor_factory=RealDictCursor)
@@ -27,13 +28,15 @@ def get_sorted_leaderboard(start=None, end=None, timeframe='all'):
         if timeframe == 'all':
             query = """
                 SELECT 
-                    player_name AS name,
-                    ROUND(SUM(profit_inr)::numeric, 2) AS total_winning
-                FROM transactions
-                GROUP BY player_name
+                    t.player_name AS name,
+                    ROUND(SUM(t.profit_inr)::numeric, 2) AS total_winning
+                FROM transactions t
+                JOIN games g ON t.game_id = g.game_id
+                WHERE g.group_id = %s
+                GROUP BY t.player_name
                 ORDER BY total_winning DESC;
             """
-            cur.execute(query)
+            cur.execute(query, (group_id,))
         else:
             query = """
                 SELECT 
@@ -41,29 +44,60 @@ def get_sorted_leaderboard(start=None, end=None, timeframe='all'):
                     ROUND(SUM(t.profit_inr)::numeric, 2) AS total_winning
                 FROM transactions t
                 JOIN games g ON t.game_id = g.game_id
-                WHERE g.date BETWEEN %s AND %s
+                WHERE g.group_id = %s AND g.date BETWEEN %s AND %s
                 GROUP BY t.player_name
                 ORDER BY total_winning DESC;
             """
-            cur.execute(query, (start, end))
+            cur.execute(query, (group_id, start, end))
 
         rows = cur.fetchall()
         cur.close()
         conn.close()
 
-        # Convert Decimal values to float for clean JSON response
-        leaderboard = []
-        for row in rows:
-            leaderboard.append({
-                'name': row['name'],
-                'total_winning': float(row['total_winning']) if row['total_winning'] is not None else 0.0
-            })
-
-        return leaderboard
-
+        return [{'name': r['name'], 'total_winning': float(r['total_winning'])} for r in rows]
     except Exception as e:
-        print(f"Error during leaderboard query: {e}")
+        print(f"Leaderboard error: {e}")
         return []
+
+@app.route('/api/groups', methods=['GET'])
+def get_groups():
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor(cursor_factory=RealDictCursor)
+        cur.execute("SELECT group_id, group_name AS name FROM groups ORDER BY created_at ASC;")
+        groups = cur.fetchall()
+        cur.close()
+        conn.close()
+        return jsonify(groups)
+    except Exception as e:
+        print(f"Error fetching groups: {e}")
+        return jsonify([]), 500
+
+@app.route('/api/groups', methods=['POST'])
+def create_group():
+    data = request.get_json() or {}
+    name = data.get('name', '').strip()
+    if not name:
+        return jsonify({"status": "error", "message": "Group name is required"}), 400
+
+    # Generate URL-friendly slug (e.g. "Hostel Gang" -> "hostel-gang")
+    slug = re.sub(r'[^a-zA-Z0-9]+', '-', name).strip('-').lower()
+    if not slug:
+        slug = f"group-{uuid.uuid4().hex[:6]}"
+
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute("INSERT INTO groups (group_id, group_name) VALUES (%s, %s);", (slug, name))
+        conn.commit()
+        cur.close()
+        conn.close()
+        return jsonify({"status": "success", "group_id": slug, "name": name}), 201
+    except psycopg2.IntegrityError:
+        return jsonify({"status": "error", "message": "A group with this name already exists"}), 400
+    except Exception as e:
+        print(f"Error creating group: {e}")
+        return jsonify({"status": "error", "message": "Failed to create group"}), 500
 
 @app.route('/api/add_game', methods=['POST'])
 def add_game():
@@ -75,6 +109,7 @@ def add_game():
     submitted_date = data.get('date')
     date = submitted_date if submitted_date else today
 
+    group_id = data.get('group_id', 'main')
     chip_ratio = data.get('chip_ratio', 0)
     transactions = data.get('transactions', [])
     buy_in_amt = data.get('buy_in_amt', 0)
@@ -116,11 +151,11 @@ def add_game():
         conn = get_db_connection()
         cur = conn.cursor()
 
-        # 1. Insert Game
+        # 1. Insert Game with group_id
         cur.execute("""
-            INSERT INTO games (game_id, date, chip_ratio, buy_in_amt, total_buy_ins)
-            VALUES (%s, %s, %s, %s, %s);
-        """, (game_uuid, date, chip_ratio, buy_in_amt, total_buy_ins))
+            INSERT INTO games (game_id, group_id, date, chip_ratio, buy_in_amt, total_buy_ins)
+            VALUES (%s, %s, %s, %s, %s, %s);
+        """, (game_uuid, group_id, date, chip_ratio, buy_in_amt, total_buy_ins))
 
         # 2. Batch Insert Transactions
         execute_values(
@@ -147,20 +182,21 @@ def leaderboard():
     timeframe = request.args.get('timeframe', 'all')
     start = request.args.get('start')
     end = request.args.get('end')
+    group_id = request.args.get('group_id', 'main')
 
     today_date = datetime.now()
     today_str = today_date.strftime('%Y-%m-%d')
 
     if timeframe == 'week':
         prev_date_str = (today_date - timedelta(days=7)).strftime('%Y-%m-%d')
-        data = get_sorted_leaderboard(prev_date_str, today_str, timeframe='week')
+        data = get_sorted_leaderboard(prev_date_str, today_str, timeframe='week', group_id=group_id)
     elif timeframe == 'month':
         prev_date_str = (today_date - timedelta(days=30)).strftime('%Y-%m-%d')
-        data = get_sorted_leaderboard(prev_date_str, today_str, timeframe='month')
+        data = get_sorted_leaderboard(prev_date_str, today_str, timeframe='month', group_id=group_id)
     elif timeframe == 'custom' and start and end:
-        data = get_sorted_leaderboard(start, end, timeframe='custom')
+        data = get_sorted_leaderboard(start, end, timeframe='custom', group_id=group_id)
     else:
-        data = get_sorted_leaderboard()
+        data = get_sorted_leaderboard(timeframe='all', group_id=group_id)
 
     return jsonify(data)
 
