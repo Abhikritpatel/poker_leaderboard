@@ -2,7 +2,7 @@ import os
 import re
 import uuid
 from datetime import datetime, timedelta
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, request, render_template, send_from_directory
 import psycopg2
 from psycopg2.extras import RealDictCursor, execute_values
 from dotenv import load_dotenv
@@ -203,6 +203,14 @@ def leaderboard():
 @app.route('/')
 def home():
     return render_template('index.html')
+
+@app.route('/style.css')
+def serve_css():
+    return send_from_directory('static', 'style.css')
+
+@app.route('/script.js')
+def serve_js():
+    return send_from_directory('static', 'script.js')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, port=5001)
