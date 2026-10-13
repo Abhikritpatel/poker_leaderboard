@@ -28,6 +28,22 @@ cur.execute("""
 """)
 # 4. Ensure all existing games are assigned to 'main'
 cur.execute("UPDATE games SET group_id = 'main' WHERE group_id IS NULL;")
-print("✅ Phase 1 complete: Database now supports groups!")
+
+# 5. Add admin_pin_hash to groups table
+cur.execute("""
+    ALTER TABLE groups 
+    ADD COLUMN IF NOT EXISTS admin_pin_hash VARCHAR(255);
+""")
+
+# Backfill default PIN '1234' for existing groups that have no PIN
+from werkzeug.security import generate_password_hash
+default_hash = generate_password_hash("1234")
+cur.execute("""
+    UPDATE groups 
+    SET admin_pin_hash = %s 
+    WHERE admin_pin_hash IS NULL;
+""", (default_hash,))
+
+print("✅ Phase 2 complete: Database now supports table admin pins!")
 cur.close()
 conn.close()

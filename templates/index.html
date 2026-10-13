@@ -19,9 +19,13 @@
                     <option value="main">Loading tables...</option>
                 </select>
             </div>
-            <button id="create_group_btn" class="btn-new-table">
-                + New Table
-            </button>
+            <div class="header-actions">
+                <span id="role_badge" class="role-badge role-viewer">Viewer</span>
+                <button id="admin_action_btn" class="btn-role-action">Unlock Admin</button>
+                <button id="create_group_btn" class="btn-new-table">
+                    + New Table
+                </button>
+            </div>
         </div>
 
         <div class="filter-container">
@@ -130,5 +134,75 @@
             <button class="remove-btn">X</button>
         </div>
     </template>
+    <!-- 4. Unlock Admin Modal -->
+    <div id="unlock_modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 class="modal-title">Unlock Table Admin</h3>
+                <button id="unlock_modal_close" class="modal-close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="text-muted">Enter the Admin PIN for <strong id="unlock_table_name">Table</strong> to enable game logging on this device.</p>
+                <label for="admin_pin_input">Admin PIN / Passkey</label>
+                <input type="password" id="admin_pin_input" placeholder="Enter PIN">
+                <div id="unlock_error" class="modal-error">Invalid PIN. Please try again.</div>
+            </div>
+            <div class="modal-actions">
+                <button id="unlock_cancel_btn" class="btn-secondary">Cancel</button>
+                <button id="unlock_submit_btn" class="btn-new-table">Verify & Unlock</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. Share Admin Access Modal -->
+    <div id="share_modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 class="modal-title">Share Admin Access</h3>
+                <button id="share_modal_close" class="modal-close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="text-muted">Anyone with this PIN or invite link can log games for <strong id="share_table_name">Table</strong>.</p>
+                
+                <label>Table Admin PIN</label>
+                <div class="key-box">
+                    <span id="share_pin_display" class="key-val">••••</span>
+                    <button id="copy_pin_btn" class="btn-copy">Copy PIN</button>
+                </div>
+
+                <label>Direct Admin Invite Link</label>
+                <div class="key-box">
+                    <span id="share_link_display" class="key-val invite-link-text">...</span>
+                    <button id="copy_link_btn" class="btn-copy">Copy Link</button>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button id="share_done_btn" class="btn-secondary">Done</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6. Create Table Modal -->
+    <div id="create_modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 class="modal-title">Create Poker Table</h3>
+                <button id="create_modal_close" class="modal-close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <label for="new_table_name_input">Table Name</label>
+                <input type="text" id="new_table_name_input" placeholder="e.g. Hostel Gang, Friday Crew">
+                
+                <label for="new_table_pin_input">Admin PIN (Optional)</label>
+                <input type="text" id="new_table_pin_input" placeholder="Leave blank to auto-generate 6-digit PIN">
+                <p class="text-muted">You will automatically be saved as the Admin on this device, and you can share access with co-hosts.</p>
+                <div id="create_table_error" class="modal-error"></div>
+            </div>
+            <div class="modal-actions">
+                <button id="create_cancel_btn" class="btn-secondary">Cancel</button>
+                <button id="create_submit_btn" class="btn-new-table">Create Table</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

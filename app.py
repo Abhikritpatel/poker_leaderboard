@@ -2,7 +2,9 @@ import os
 import re
 import uuid
 from datetime import datetime, timedelta
+import secrets
 from flask import Flask, jsonify, request, render_template, send_from_directory
+from werkzeug.security import generate_password_hash, check_password_hash
 import psycopg2
 from psycopg2.extras import RealDictCursor, execute_values
 from dotenv import load_dotenv
@@ -73,12 +75,36 @@ def get_groups():
         print(f"Error fetching groups: {e}")
         return jsonify([]), 500
 
+def verify_table_admin(group_id, pin):
+    if not pin or not group_id:
+        return False
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor(cursor_factory=RealDictCursor)
+        cur.execute("SELECT admin_pin_hash FROM groups WHERE group_id = %s;", (group_id,))
+        row = cur.fetchone()
+        cur.close()
+        conn.close()
+        if row and row['admin_pin_hash']:
+            return check_password_hash(row['admin_pin_hash'], str(pin).strip())
+        return False
+    except Exception as e:
+        print(f"Admin verification error: {e}")
+        return False
+
 @app.route('/api/groups', methods=['POST'])
 def create_group():
     data = request.get_json() or {}
     name = data.get('name', '').strip()
+    pin = data.get('pin', '').strip()
     if not name:
         return jsonify({"status": "error", "message": "Group name is required"}), 400
+
+    # If pin is not provided, generate a secure 6-digit pin
+    if not pin:
+        pin = f"{secrets.randbelow(900000) + 100000}"
+
+    pin_hash = generate_password_hash(pin)
 
     # Generate URL-friendly slug (e.g. "Hostel Gang" -> "hostel-gang")
     slug = re.sub(r'[^a-zA-Z0-9]+', '-', name).strip('-').lower()
@@ -88,16 +114,29 @@ def create_group():
     try:
         conn = get_db_connection()
         cur = conn.cursor()
-        cur.execute("INSERT INTO groups (group_id, group_name) VALUES (%s, %s);", (slug, name))
+        cur.execute("INSERT INTO groups (group_id, group_name, admin_pin_hash) VALUES (%s, %s, %s);", (slug, name, pin_hash))
         conn.commit()
         cur.close()
         conn.close()
-        return jsonify({"status": "success", "group_id": slug, "name": name}), 201
+        return jsonify({"status": "success", "group_id": slug, "name": name, "admin_pin": pin}), 201
     except psycopg2.IntegrityError:
         return jsonify({"status": "error", "message": "A group with this name already exists"}), 400
     except Exception as e:
         print(f"Error creating group: {e}")
         return jsonify({"status": "error", "message": "Failed to create group"}), 500
+
+@app.route('/api/groups/verify_admin', methods=['POST'])
+def verify_admin_route():
+    data = request.get_json() or {}
+    group_id = data.get('group_id', '').strip()
+    pin = data.get('pin', '').strip()
+    if not group_id or not pin:
+        return jsonify({"status": "error", "is_admin": False, "message": "Table ID and PIN are required"}), 400
+
+    is_valid = verify_table_admin(group_id, pin)
+    if is_valid:
+        return jsonify({"status": "success", "is_admin": True}), 200
+    return jsonify({"status": "error", "is_admin": False, "message": "Invalid Admin PIN"}), 401
 
 @app.route('/api/add_game', methods=['POST'])
 def add_game():
@@ -105,11 +144,17 @@ def add_game():
     if not data:
         return jsonify({"status": "error", "message": "No data provided"}), 400
 
+    group_id = data.get('group_id', 'main')
+
+    # Enforce Table Admin Authorization
+    admin_pin = request.headers.get('X-Admin-Key') or data.get('admin_pin')
+    if not verify_table_admin(group_id, admin_pin):
+        return jsonify({"status": "error", "message": "Admin authorization required to log games for this table."}), 403
+
     today = datetime.now().strftime('%Y-%m-%d')
     submitted_date = data.get('date')
     date = submitted_date if submitted_date else today
 
-    group_id = data.get('group_id', 'main')
     chip_ratio = data.get('chip_ratio', 0)
     transactions = data.get('transactions', [])
     buy_in_amt = data.get('buy_in_amt', 0)
