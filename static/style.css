@@ -379,7 +379,7 @@ tr:nth-child(even) {
 
 /* 10. Semantic Utility Classes */
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .flex-1 {
@@ -405,3 +405,200 @@ tr:nth-child(even) {
 .mb-0 {
     margin-bottom: 0;
 }
+
+/* 11. Role Badges & Access Control Header */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.role-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.role-admin {
+    background-color: rgba(63, 185, 80, 0.15);
+    color: #3fb950;
+    border: 1px solid rgba(63, 185, 80, 0.4);
+}
+
+.role-viewer {
+    background-color: rgba(139, 148, 158, 0.15);
+    color: #8b949e;
+    border: 1px solid rgba(139, 148, 158, 0.3);
+}
+
+.btn-role-action {
+    width: auto;
+    padding: 8px 14px;
+    font-size: 0.85em;
+    background-color: #21262d;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    color: #c9d1d9;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.btn-role-action:hover {
+    background-color: #30363d;
+    border-color: #8b949e;
+    color: #ffffff;
+}
+
+/* 12. Modals & Overlays */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.modal-card {
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 440px;
+    padding: 25px;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
+    box-sizing: border-box;
+    animation: modalFadeIn 0.2s ease-out;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.modal-title {
+    margin: 0;
+    font-size: 1.25em;
+    color: #f0f6fc;
+}
+
+.modal-close-btn {
+    background: transparent;
+    border: none;
+    color: #8b949e;
+    font-size: 1.3em;
+    cursor: pointer;
+    width: auto;
+    padding: 4px 8px;
+    line-height: 1;
+}
+
+.modal-close-btn:hover {
+    color: #f85149;
+}
+
+.modal-body {
+    margin-bottom: 20px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.modal-actions button {
+    width: auto;
+}
+
+.btn-secondary {
+    background-color: #21262d;
+    border: 1px solid #30363d;
+    color: #c9d1d9;
+}
+
+.btn-secondary:hover {
+    background-color: #30363d;
+}
+
+.key-box {
+    background-color: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin: 12px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.key-val {
+    font-family: monospace;
+    font-size: 1.25em;
+    font-weight: bold;
+    color: #58a6ff;
+    letter-spacing: 1.5px;
+    word-break: break-all;
+}
+
+.btn-copy {
+    width: auto;
+    padding: 7px 12px;
+    font-size: 0.85em;
+    background-color: #238636;
+    border-radius: 6px;
+    white-space: nowrap;
+}
+
+.btn-copy:hover {
+    background-color: #2ea043;
+}
+
+.text-muted {
+    color: #8b949e;
+    font-size: 0.9em;
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.modal-error {
+    color: #f85149;
+    font-size: 0.9em;
+    margin-top: 8px;
+    display: none;
+}
+
+.invite-link-text {
+    font-size: 0.82em;
+    font-weight: normal;
+}
+
