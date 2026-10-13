@@ -1,208 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> 
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0e2a1f">
     <title>Poker Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;0,6..96,800;1,6..96,400;1,6..96,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
 
-<body> 
-    <!-- 1. Leaderboard View -->
-    <div id="leaderboard-view">
-        <!-- Top Table Switcher -->
-        <div class="header-bar">
-            <div class="header-group-container">
-                <span class="poker-icon">♠️</span>
-                <select id="group_select" class="group-select">
-                    <option value="main">Loading tables...</option>
-                </select>
+<body data-role="viewer" data-view="standings">
+    <div class="wrap">
+        <header class="head">
+            <div class="plate">♠<i>Poker Tracker</i>♥</div>
+            <div class="role only-dealer">
+                <div class="puck" title="You are dealing this table">D</div>
+                <span>You're dealing · <button class="link" data-open="dlg-share">share access</button></span>
             </div>
-            <div class="header-actions">
-                <span id="role_badge" class="role-badge role-viewer">Viewer</span>
-                <button id="admin_action_btn" class="btn-role-action">Unlock Admin</button>
-                <button id="create_group_btn" class="btn-new-table">
-                    + New Table
+            <div class="role only-viewer">
+                <span class="eye label">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
+                    Viewing
+                </span>
+                <button class="link" data-open="dlg-unlock">unlock dealer</button>
+            </div>
+        </header>
+
+        <nav class="hand" id="hand" aria-label="Tables"></nav>
+
+        <section class="hero">
+            <div>
+                <h1 id="table_title">&nbsp;</h1>
+                <p class="lede" id="lede">Shuffling the deck…</p>
+            </div>
+            <div class="stats" id="stats">
+                <div class="stat"><span class="label">Nights</span><b id="st_nights">–</b></div>
+                <div class="stat"><span class="label">Biggest pot</span><b id="st_pot">–</b></div>
+                <div class="stat"><span class="label">Players</span><b id="st_players">–</b></div>
+            </div>
+        </section>
+
+        <div class="controls">
+            <div class="seg" role="group" aria-label="View">
+                <button id="v_stand" aria-pressed="true">Standings</button>
+                <button id="v_sess" aria-pressed="false">
+                    <svg class="only-viewer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+                    Deal a session
                 </button>
             </div>
-        </div>
-
-        <div class="filter-container">
-            <select id="time_frame_select">
-                <option value="all"> All Time </option>
-                <option value="week"> Past 7 days</option>
-                <option value="month"> Past 30 days</option>
-                <option value="custom"> Custom date range</option>
-            </select>
-            <div id="custom_date_controls">
-                <input type="date" id="start_date">
-                <span>TO</span>
-                <input type="date" id="end_date">
-                <button id="apply_custom_date_btn">Apply</button>
+            <div class="ranges" id="ranges" role="group" aria-label="Time range">
+                <button data-r="all" aria-pressed="true">All time</button>
+                <button data-r="month" aria-pressed="false">30 days</button>
+                <button data-r="week" aria-pressed="false">7 days</button>
+                <button data-r="custom" aria-pressed="false">Custom…</button>
             </div>
         </div>
 
-        <h1 id="leaderboard_title" class="leaderboard-title">Poker Hall of Fame 🏆</h1>
-        
-        <div id="leaderboard_display"> Loading leaderboard... </div>
+        <form class="custom-range" id="custom_range" hidden>
+            <div><label class="label" for="start_date">From</label><input class="field" type="date" id="start_date" required></div>
+            <div><label class="label" for="end_date">To</label><input class="field" type="date" id="end_date" required></div>
+            <button class="btn-gold" type="submit">Apply</button>
+        </form>
 
-        <button id="start-game-btn" class="btn-fab">
-            +
-        </button>
-    </div>
+        <div class="layout">
+            <main>
+                <!-- Standings -->
+                <section id="standings">
+                    <div class="panel" id="board_panel">
+                        <div class="thead label"><span>Rank</span><span>Player</span><span class="tr">Trend</span><span>Net ₹</span></div>
+                        <div id="board" aria-live="polite"></div>
+                    </div>
+                    <p class="fine" id="board_note"></p>
+                </section>
 
-    <!-- 2. Live Game Staging View -->
-    <div id="live-game-view" class="hidden">
-        <div class="live-view-header">
-            <button id="cancel-game-btn" class="btn-cancel">Cancel</button>
-            <h2 id="live_session_title" class="live-session-title">Live Session</h2>
-            <div class="header-spacer"></div>
-        </div>
+                <!-- Live session -->
+                <section id="session" hidden>
+                    <div class="conf">
+                        <div><label class="label" for="game_date">Date</label><input class="field" id="game_date" type="date"></div>
+                        <div><label class="label" for="chip_ratio">Chips per ₹</label><input class="field" id="chip_ratio" type="number" value="5" min="0.01" step="any" inputmode="decimal"></div>
+                        <div><label class="label" for="buy_in_amt">Buy-in ₹</label><input class="field" id="buy_in_amt" type="number" value="100" min="1" step="any" inputmode="decimal"></div>
+                    </div>
 
-        <div class="input-card game-config-card">
-            <div class="game-config-row">
-                <div class="flex-2">
-                    <label for="game-date">Date</label>
-                    <input type="date" id="game-date">
-                </div>
-                <div class="flex-1">
-                    <label for="chip-ratio">Ratio</label>
-                    <input type="number" id="chip-ratio" value="5">
-                </div>
-                <div class="flex-1">
-                    <label for="buy-in-amt">Buy-in (₹)</label>
-                    <input type="number" id="buy-in-amt" value="100">
-                </div>
-            </div>
-        </div>
+                    <div class="oval">
+                        <div class="side-stat"><div class="stack" id="stack" aria-hidden="true"></div></div>
+                        <div class="mid">
+                            <span class="label">The pot</span>
+                            <div id="f_pot"></div>
+                            <div class="sub" id="pot_sub"></div>
+                        </div>
+                        <div class="side-stat"><span class="label">Chips in play</span><div id="f_chips"></div></div>
+                    </div>
+                    <p class="note flip-note"><button class="link" id="flip_toggle" aria-pressed="true">Flip digits: on</button></p>
 
-        <div class="roster-header">
-            <h3 class="roster-title">Table Roster</h3>
-            <div class="roster-badge">
-                <span class="badge-label">Total Buy-ins:</span>
-                <span id="roster-buyins-badge" class="badge-count">0</span>
-            </div>
-        </div>
-        <div id="players-container"></div>
+                    <div class="panel" id="seats_panel">
+                        <div id="seats"></div>
+                        <button class="addp" id="add_player" type="button">+ seat another player</button>
+                    </div>
 
-        <button id="add-player-btn" class="btn-add-player">
-            + Seat a Player
-        </button>
+                    <div class="plaque">
+                        <div class="msg" id="msg"></div>
+                        <button class="deal" id="save_game" disabled>Lock it in</button>
+                    </div>
 
-        <div class="input-card summary-card">
-            <!-- Live Session Metrics Summary -->
-            <div class="metrics-summary-grid">
-                <div class="metric-box">
-                    <div class="metric-title">Total Buy-ins</div>
-                    <div id="live-total-buyins" class="metric-value metric-blue">0</div>
-                </div>
-                <div class="metric-box">
-                    <div class="metric-title">Total Pot</div>
-                    <div id="live-total-pot" class="metric-value metric-gold">₹0</div>
-                </div>
-                <div class="metric-box">
-                    <div class="metric-title">Chips in Play</div>
-                    <div id="live-total-chips" class="metric-value metric-purple">0</div>
-                </div>
-            </div>
+                    <div class="settle recap">
+                        <div class="hd">
+                            <h3>Group recap</h3>
+                            <label class="chk"><input type="checkbox" id="inc_settle" checked> include who pays whom</label>
+                        </div>
+                        <div class="bubble" id="bubble"></div>
+                        <div class="acts">
+                            <button class="deal" id="copy_recap" disabled>Copy message</button>
+                            <button class="copy label" id="share_recap" hidden>Share…</button>
+                        </div>
+                    </div>
 
-            <div class="settlement-container">
-                <h3 id="live-balance" class="live-balance-title">Discrepancy: Checking...</h3>
-                <button id="submit-game-btn" class="btn-submit" disabled>
-                    Math Doesn't Match
-                </button>
-            </div>
+                    <div class="settle">
+                        <div class="hd"><h3>Settle up</h3></div>
+                        <div id="payments"></div>
+                    </div>
+
+                    <div class="saved-actions" id="saved_actions" hidden>
+                        <button class="btn-gold" id="back_to_board">Back to standings</button>
+                    </div>
+                </section>
+            </main>
+
+            <aside class="side">
+                <h3>Last five nights</h3>
+                <div class="log" id="log"></div>
+            </aside>
         </div>
     </div>
 
-    <!-- 3. Player Row Template -->
-    <template id="player-row-template">
-        <div class="input-card player-row">
-            <input type="text" class="p-name" placeholder="Name">
-            
-            <div class="p-buyins-col">
-                <label>Buy-ins</label>
-                <input type="number" class="p-buyins live-input" value="1" min="1">
-            </div>
-            
-            <div class="p-chips-col">
-                <label>End Chips</label>
-                <input type="number" class="p-chips live-input" placeholder="0">
-            </div>
-            
-            <button class="remove-btn">X</button>
-        </div>
-    </template>
-    <!-- 4. Unlock Admin Modal -->
-    <div id="unlock_modal" class="modal-overlay hidden">
-        <div class="modal-card">
-            <div class="modal-header">
-                <h3 class="modal-title">Unlock Table Admin</h3>
-                <button id="unlock_modal_close" class="modal-close-btn">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p class="text-muted">Enter the Admin PIN for <strong id="unlock_table_name">Table</strong> to enable game logging on this device.</p>
-                <label for="admin_pin_input">Admin PIN / Passkey</label>
-                <input type="password" id="admin_pin_input" placeholder="Enter PIN">
-                <div id="unlock_error" class="modal-error">Invalid PIN. Please try again.</div>
-            </div>
-            <div class="modal-actions">
-                <button id="unlock_cancel_btn" class="btn-secondary">Cancel</button>
-                <button id="unlock_submit_btn" class="btn-new-table">Verify & Unlock</button>
-            </div>
-        </div>
+    <div class="dock">
+        <button class="deal only-dealer" id="dock_deal">Deal a session</button>
+        <button class="deal only-viewer" data-open="dlg-unlock">Unlock dealer</button>
     </div>
 
-    <!-- 5. Share Admin Access Modal -->
-    <div id="share_modal" class="modal-overlay hidden">
-        <div class="modal-card">
-            <div class="modal-header">
-                <h3 class="modal-title">Share Admin Access</h3>
-                <button id="share_modal_close" class="modal-close-btn">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p class="text-muted">Anyone with this PIN or invite link can log games for <strong id="share_table_name">Table</strong>.</p>
-                
-                <label>Table Admin PIN</label>
-                <div class="key-box">
-                    <span id="share_pin_display" class="key-val">••••</span>
-                    <button id="copy_pin_btn" class="btn-copy">Copy PIN</button>
-                </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-                <label>Direct Admin Invite Link</label>
-                <div class="key-box">
-                    <span id="share_link_display" class="key-val invite-link-text">...</span>
-                    <button id="copy_link_btn" class="btn-copy">Copy Link</button>
-                </div>
+    <!-- Unlock -->
+    <dialog id="dlg-unlock">
+        <form method="dialog" class="dlg" id="f_unlock">
+            <button class="x" value="x" aria-label="Close">×</button>
+            <h2>Take the dealer's seat</h2>
+            <p>Enter the dealer PIN for <b id="unlock_name">this table</b> to log games from this device.</p>
+            <label class="label" for="pin">Dealer PIN</label>
+            <input type="password" id="pin" inputmode="numeric" autocomplete="off" placeholder="••••••">
+            <div class="err" id="unlock_err"></div>
+            <div class="row">
+                <button class="btn2" value="x">Cancel</button>
+                <button class="btn1" id="unlock_go" type="button">Unlock</button>
             </div>
-            <div class="modal-actions">
-                <button id="share_done_btn" class="btn-secondary">Done</button>
-            </div>
-        </div>
-    </div>
+        </form>
+    </dialog>
 
-    <!-- 6. Create Table Modal -->
-    <div id="create_modal" class="modal-overlay hidden">
-        <div class="modal-card">
-            <div class="modal-header">
-                <h3 class="modal-title">Create Poker Table</h3>
-                <button id="create_modal_close" class="modal-close-btn">&times;</button>
+    <!-- Share -->
+    <dialog id="dlg-share">
+        <form method="dialog" class="dlg">
+            <button class="x" value="x" aria-label="Close">×</button>
+            <h2 id="share_title">Share the deal</h2>
+            <p>Anyone with this PIN or link can log games for <b id="share_name">this table</b>.</p>
+            <div class="pinchips" id="pinchips"></div>
+            <label class="label">Invite link</label>
+            <div class="linkbox" id="share_link"></div>
+            <p class="small">The part after # stays in the browser. It is never sent to the server or written to its logs.</p>
+            <div class="row">
+                <button class="btn2" type="button" id="copy_pin">Copy PIN</button>
+                <button class="btn2" type="button" id="copy_link">Copy link</button>
+                <button class="btn1" value="x">Done</button>
             </div>
-            <div class="modal-body">
-                <label for="new_table_name_input">Table Name</label>
-                <input type="text" id="new_table_name_input" placeholder="e.g. Hostel Gang, Friday Crew">
-                
-                <label for="new_table_pin_input">Admin PIN (Optional)</label>
-                <input type="text" id="new_table_pin_input" placeholder="Leave blank to auto-generate 6-digit PIN">
-                <p class="text-muted">You will automatically be saved as the Admin on this device, and you can share access with co-hosts.</p>
-                <div id="create_table_error" class="modal-error"></div>
+        </form>
+    </dialog>
+
+    <!-- New table -->
+    <dialog id="dlg-new">
+        <form method="dialog" class="dlg" id="f_new">
+            <button class="x" value="x" aria-label="Close">×</button>
+            <h2>Open a new table</h2>
+            <p>Each table keeps its own standings and its own dealer PIN.</p>
+            <label class="label" for="new_name">Table name</label>
+            <input type="text" id="new_name" maxlength="100" placeholder="e.g. Hostel gang" autocomplete="off">
+            <label class="label" for="new_pin">Dealer PIN (optional)</label>
+            <input type="text" id="new_pin" maxlength="32" placeholder="Leave blank for a random 6-digit PIN" autocomplete="off">
+            <div class="err" id="new_err"></div>
+            <div class="row">
+                <button class="btn2" value="x">Cancel</button>
+                <button class="btn1" id="new_go" type="button">Open table</button>
             </div>
-            <div class="modal-actions">
-                <button id="create_cancel_btn" class="btn-secondary">Cancel</button>
-                <button id="create_submit_btn" class="btn-new-table">Create Table</button>
-            </div>
-        </div>
-    </div>
+        </form>
+    </dialog>
 </body>
 </html>

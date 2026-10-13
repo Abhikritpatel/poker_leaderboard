@@ -53,10 +53,39 @@ def get_sorted_leaderboard(start=None, end=None, timeframe='all', group_id='main
             cur.execute(query, (group_id, start, end))
 
         rows = cur.fetchall()
+
+        # Per-game results in date order, used for nights played and trend lines
+        if timeframe == 'all':
+            date_filter, params = "", (group_id,)
+        else:
+            date_filter, params = "AND g.date BETWEEN %s AND %s", (group_id, start, end)
+        cur.execute(f"""
+            SELECT t.player_name AS name, t.profit_inr AS profit
+            FROM transactions t
+            JOIN games g ON t.game_id = g.game_id
+            WHERE g.group_id = %s {date_filter}
+            ORDER BY g.date, g.created_at;
+        """, params)
+        history = {}
+        for h in cur.fetchall():
+            history.setdefault(h['name'], []).append(float(h['profit']))
+
         cur.close()
         conn.close()
 
-        return [{'name': r['name'], 'total_winning': float(r['total_winning'])} for r in rows]
+        leaderboard = []
+        for r in rows:
+            running, series = 0.0, []
+            for profit in history.get(r['name'], []):
+                running += profit
+                series.append(round(running, 2))
+            leaderboard.append({
+                'name': r['name'],
+                'total_winning': float(r['total_winning']),
+                'nights': len(series),
+                'series': series,
+            })
+        return leaderboard
     except Exception as e:
         print(f"Leaderboard error: {e}")
         return []
@@ -244,6 +273,64 @@ def leaderboard():
         data = get_sorted_leaderboard(timeframe='all', group_id=group_id)
 
     return jsonify(data)
+
+@app.route('/api/table_summary', methods=['GET'])
+def table_summary():
+    group_id = request.args.get('group_id', 'main')
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor(cursor_factory=RealDictCursor)
+
+        cur.execute("""
+            SELECT COUNT(*) AS nights,
+                   COALESCE(MAX(total_buy_ins * buy_in_amt), 0) AS biggest_pot
+            FROM games WHERE group_id = %s;
+        """, (group_id,))
+        totals = cur.fetchone()
+
+        cur.execute("""
+            SELECT COUNT(DISTINCT t.player_name) AS players
+            FROM transactions t JOIN games g ON t.game_id = g.game_id
+            WHERE g.group_id = %s;
+        """, (group_id,))
+        players = cur.fetchone()['players']
+
+        cur.execute("""
+            SELECT g.date,
+                   g.total_buy_ins * g.buy_in_amt AS pot,
+                   (SELECT COUNT(*) FROM transactions WHERE game_id = g.game_id) AS players,
+                   top.player_name AS top_name,
+                   top.profit_inr AS top_profit
+            FROM (
+                SELECT game_id, date, total_buy_ins, buy_in_amt, created_at
+                FROM games WHERE group_id = %s
+                ORDER BY date DESC, created_at DESC LIMIT 5
+            ) g
+            LEFT JOIN LATERAL (
+                SELECT player_name, profit_inr FROM transactions
+                WHERE game_id = g.game_id ORDER BY profit_inr DESC LIMIT 1
+            ) top ON TRUE
+            ORDER BY g.date DESC, g.created_at DESC;
+        """, (group_id,))
+        recent = [{
+            'date': r['date'].isoformat(),
+            'pot': float(r['pot']),
+            'players': r['players'],
+            'top_name': r['top_name'],
+            'top_profit': float(r['top_profit']) if r['top_profit'] is not None else 0.0,
+        } for r in cur.fetchall()]
+
+        cur.close()
+        conn.close()
+        return jsonify({
+            'nights': totals['nights'],
+            'biggest_pot': float(totals['biggest_pot']),
+            'players': players,
+            'recent': recent,
+        })
+    except Exception as e:
+        print(f"Table summary error: {e}")
+        return jsonify({'nights': 0, 'biggest_pot': 0, 'players': 0, 'recent': []}), 500
 
 @app.route('/')
 def home():
