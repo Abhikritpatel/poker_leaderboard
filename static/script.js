@@ -27,10 +27,11 @@ function setAdminPin(groupId, pin) {
     }
 }
 
-// Parse URL parameters for table and optional admin key
+// Parse the table from the query string. The admin key travels in the URL
+// fragment (#key=...) so it is never sent to the server or written to logs.
 const urlParams = new URLSearchParams(window.location.search);
 const tableFromUrl = urlParams.get('table');
-const keyFromUrl = urlParams.get('key') || urlParams.get('admin_key');
+const keyFromUrl = new URLSearchParams(window.location.hash.slice(1)).get('key');
 const tableFromStorage = localStorage.getItem('poker_active_table');
 
 if (tableFromUrl) {
@@ -304,7 +305,7 @@ adminActionBtn.addEventListener('click', () => {
         shareTableName.innerText = currentGroupName;
         const pin = getAdminPin(currentGroupId) || '••••';
         sharePinDisplay.innerText = pin;
-        const inviteUrl = `${window.location.origin}/?table=${encodeURIComponent(currentGroupId)}&key=${encodeURIComponent(pin)}`;
+        const inviteUrl = `${window.location.origin}/?table=${encodeURIComponent(currentGroupId)}#key=${encodeURIComponent(pin)}`;
         shareLinkDisplay.innerText = inviteUrl;
         copyPinBtn.innerText = 'Copy PIN';
         copyLinkBtn.innerText = 'Copy Link';
@@ -387,7 +388,7 @@ copyPinBtn.addEventListener('click', () => {
 copyLinkBtn.addEventListener('click', () => {
     const pin = getAdminPin(currentGroupId);
     if (pin) {
-        const inviteUrl = `${window.location.origin}/?table=${encodeURIComponent(currentGroupId)}&key=${encodeURIComponent(pin)}`;
+        const inviteUrl = `${window.location.origin}/?table=${encodeURIComponent(currentGroupId)}#key=${encodeURIComponent(pin)}`;
         navigator.clipboard.writeText(inviteUrl).then(() => {
             copyLinkBtn.innerText = 'Copied!';
             setTimeout(() => { copyLinkBtn.innerText = 'Copy Link'; }, 2000);
